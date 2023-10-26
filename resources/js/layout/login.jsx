@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../components/Icon';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
     return (
@@ -22,17 +23,10 @@ const LoginForm = () => {
                         <label htmlFor="password" className="block text-gray-600">Contraseña</label>
                         <input type="password" id="password" name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autoComplete="off" />
                     </div>
-                    {/* <div className="mb-4 flex items-center">
-                        <input type="checkbox" id="remember" name="remember" className="text-blue-500" />
-                        <label htmlFor="remember" className="text-gray-600 ml-2">Remember Me</label>
-                    </div> */}
-                    {/* <div className="mb-6 text-blue-500">
-                        <a href="#" className="hover:underline">Forgot Password?</a>
-                    </div> */}
                     <button type="submit" className="bg-black hover:bg-gray-800 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
                 </form>
                 <div className="mt-6 text-blue-500 text-center">
-                    <a href="#" className="hover:underline">¿No tienes cuenta? Creala dando aqui</a>
+                <Link to="/Register" className="hover:underline">¿No tienes cuenta? Creala dando aqui</Link>
                 </div>
             </div>
         </div>

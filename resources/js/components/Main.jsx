@@ -3,6 +3,7 @@ import Menu from './Menu'
 import Home from './Home';
 import Example from './Example';
 import Login from '../layout/login';
+import Register from '../layout/Register';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function Main() {
@@ -12,6 +13,7 @@ function Main() {
                 <Route path="Example" element={<Example/>} />
                 <Route path="Home" element={<Home/>} />
                 <Route path="Login" element={<Login/>} />
+                <Route path="Register" element={<Register/>} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Route>
         </Routes>
