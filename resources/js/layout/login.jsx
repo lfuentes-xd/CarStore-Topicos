@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 const LoginForm = () => {
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="w-1/2 h-screen lg:block flex items-center justify-center">
-                <div className="flex items-center justify-center my-60 text-black">
+
+            <div className="w-1/2 h-5/6 lg:block flex items-center justify-center bg-black rounded-xl">
+                <div className="flex items-center justify-center my-60 text-white">
                     <Icon className="text-5xl font-bold"></Icon>
                 </div>
             </div>
@@ -26,7 +27,7 @@ const LoginForm = () => {
                     <button type="submit" className="bg-black hover:bg-gray-800 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
                 </form>
                 <div className="mt-6 text-blue-500 text-center">
-                <Link to="/Register" className="hover:underline">¿No tienes cuenta? Creala dando aqui</Link>
+                    <Link to="/Register" className="hover:underline">¿No tienes cuenta? Creala dando aqui</Link>
                 </div>
             </div>
         </div>

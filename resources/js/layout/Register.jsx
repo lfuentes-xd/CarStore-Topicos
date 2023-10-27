@@ -1,6 +1,7 @@
 import TextInput from "../components/TextInput";
-import InputLabel from "../components/InputLabel";
+import InputLabel from "../components/Inputlabel";
 import PrimaryButton from "../components/PrimaryButton";
+import { Link } from "react-router-dom";
 
 function Register() {
     return (
@@ -27,7 +28,13 @@ function Register() {
                 </div>
 
                 <div className="">
+
                     <PrimaryButton className="w-full">Register</PrimaryButton>
+                    <Link to="/Register">
+                        <PrimaryButton className="bg-red-600 hover:bg-red-800 w-full mt-3">Regresar</PrimaryButton>
+                    </Link>
+
+                    <Link to="/Register" className="hover:underline text-center">¿Ya tienes cuenta?   </Link>
                 </div>
             </form>
         </div>

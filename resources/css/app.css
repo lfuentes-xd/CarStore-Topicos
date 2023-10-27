@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Edwardian Script Regular";
+    src: url('../fonts/Edwardian Script ITC Regular.ttf'); /* Asegúrate de reemplazar esto con la ruta correcta a tu archivo de fuente */
+}
+
+
