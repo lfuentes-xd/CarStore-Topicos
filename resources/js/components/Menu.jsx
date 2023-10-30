@@ -11,7 +11,7 @@ function Menu() {
                         <div className="ml-10 flex items-baseline space-x-4">
                             <Icon className="text-white font-cursiva "></Icon>
                             <Link to="home" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium">Pagina principal</Link>
-                            <Link to="ListCards" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Autos</Link>
+                            <Link to="Cars" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Autos</Link>
                         </div>
 
                         <Link to="login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
