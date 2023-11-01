@@ -6,7 +6,6 @@ import Login from '../layout/login';
 import Register from '../layout/Register';
 import Cars from '../layout/Cars';
 import { Routes, Route, Navigate } from "react-router-dom";
-
 function Main() {
     return (
         <Routes>
