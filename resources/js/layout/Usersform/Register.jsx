@@ -1,6 +1,6 @@
-import TextInput from "../components/TextInput";
-import InputLabel from "../components/Inputlabel";
-import PrimaryButton from "../components/PrimaryButton";
+import TextInput from "../../components/TextInput";
+import InputLabel from "../../components/Inputlabel";
+import PrimaryButton from "../../components/PrimaryButton";
 import { Link } from "react-router-dom";
 
 function Register() {

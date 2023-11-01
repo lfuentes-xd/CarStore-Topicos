@@ -2,9 +2,11 @@ import React from 'react';
 import Menu from './Menu'
 import Home from './Home';
 import Example from './Example';
-import Login from '../layout/login';
-import Register from '../layout/Register';
+import Login from '../layout/Usersform/login';
+import Register from '../layout/Usersform/Register';
 import Cars from '../layout/Cars';
+import CarsAdmon from '../layout/AutosAdmon/Index';
+import SellsAdmon from '../layout/Sellsadmon/Index';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function Main() {
@@ -16,6 +18,8 @@ function Main() {
                 <Route path="Login" element={<Login/>} />
                 <Route path="Register" element={<Register/>} />
                 <Route path="Cars" element={<Cars/>} />
+                <Route path="CarsAdmon" element={<CarsAdmon/>} />
+                <Route path="SellsAdmon" element={<SellsAdmon/>} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Route>
         </Routes>
