@@ -8,7 +8,6 @@ import Cars from '../layout/Cars';
 import CarsAdmon from '../layout/AutosAdmon/Index';
 import SellsAdmon from '../layout/Sellsadmon/Index';
 import { Routes, Route, Navigate } from "react-router-dom";
-
 function Main() {
     return (
         <Routes>
