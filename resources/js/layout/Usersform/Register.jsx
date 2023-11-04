@@ -8,18 +8,16 @@ import { useNavigate } from "react-router-dom";
 
 
 function Register() {
+
     const [token, setToken] = useState(null);
     const navigate = useNavigate();
-    const [formValue, setFormValue] = useState({
-
-    })
-
+    const [formValue, setFormValue] = useState({})
 
     const onChange = (e) => {
         e.persist();
         setFormValue({ ...formValue, [e.target.name]: e.target.value });
     }
-    
+
     const handleSubmit = (e) => {
         if (e && e.preventDefault()) e.preventDefault();
         const formData = new FormData();
@@ -28,7 +26,7 @@ function Register() {
         formData.append("password", formValue.password);
         formData.append("password_confirmation", formValue.password_confirmation);
 
-        axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes 
+        axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes
             formData,
             {
                 headers: {
@@ -73,7 +71,7 @@ function Register() {
 
                 <div className="">
 
-                    <PrimaryButton className="w-full"  >Register</PrimaryButton>
+                    <PrimaryButton className="w-full">Register</PrimaryButton>
                     <Link to="/login">
                         <PrimaryButton className="bg-red-600 hover:bg-red-800 w-full mt-3">Regresar</PrimaryButton>
                     </Link>

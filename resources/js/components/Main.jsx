@@ -7,6 +7,7 @@ import Register from '../layout/Usersform/Register';
 import Cars from '../layout/Cars';
 import CarsAdmon from '../layout/AutosAdmon/Index';
 import SellsAdmon from '../layout/Sellsadmon/Index';
+import CreateCars from '../layout/AutosAdmon/CreateCar';
 import { Routes, Route, Navigate } from "react-router-dom";
 function Main() {
     return (
@@ -19,6 +20,7 @@ function Main() {
                 <Route path="Cars" element={<Cars/>} />
                 <Route path="CarsAdmon" element={<CarsAdmon/>} />
                 <Route path="SellsAdmon" element={<SellsAdmon/>} />
+                <Route path="CreateCars" element={<CreateCars/>} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Route>
         </Routes>

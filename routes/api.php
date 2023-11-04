@@ -5,16 +5,6 @@ use App\Http\Controllers\AutoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
@@ -31,3 +21,6 @@ Route::middleware('auth:api')->group(function(){
 });
 
 Route::get('/Car_index', [AutoController::class, 'index']);
+Route::get('/Car_brands', [AutoController::class, 'create']);
+Route::post('/insert', [AutoController::class, 'store']);
+Route::get('/Car_token', [AutoController::class, 'token']);

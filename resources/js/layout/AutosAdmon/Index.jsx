@@ -2,18 +2,17 @@ import PrimaryButton from "../../components/PrimaryButton"
 import Plusicon from "../../../Images/Icons/add.png"
 import DeleteIcon from "../../../Images/Icons/delete.png"
 import EditIcon from "../../../Images/Icons/edit.png"
+import LinktoButton from "../../components/LinktoButton"
 
 function CarsAdmon() {
     return (
         <>
             <div className="container my-5 mx-auto">
-
                 <h1 className="text-xl">Panel de administracion de carros</h1>
-
-                <PrimaryButton className="my-3 bg-gray-500 text-black">
+                <LinktoButton to="/CreateCars" className="my-3 bg-gray-500 text-black">
                     Crear registro
                     <img src={Plusicon} alt="" className="ml-2 w-4 h-4" />
-                </PrimaryButton>
+                </LinktoButton>
                 <div className="flex flex-col mt-5">
                     <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">

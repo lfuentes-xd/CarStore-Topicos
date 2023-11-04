@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
@@ -28,6 +28,7 @@ class AuthenticationController extends Controller
             'token'=> $token
         ]);
     }
+
     public function login (Request $request){
         $request->validate([
             'email'=>'required',
@@ -42,7 +43,7 @@ class AuthenticationController extends Controller
                 'message'=>'The provided credential are incorrect'
             ]);
         }
-        $token=$user->createToken('auth_token')->accessToken;   
+        $token=$user->createToken('auth_token')->accessToken;
 
         return response([
             'token'=> $token
