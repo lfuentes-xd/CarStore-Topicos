@@ -11,7 +11,9 @@ function Register() {
 
     const [token, setToken] = useState(null);
     const navigate = useNavigate();
-    const [formValue, setFormValue] = useState({})
+    const [formValue, setFormValue] = useState({
+
+    })
 
     const onChange = (e) => {
         e.persist();
@@ -26,7 +28,7 @@ function Register() {
         formData.append("password", formValue.password);
         formData.append("password_confirmation", formValue.password_confirmation);
 
-        axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes
+        axios.post("http://localhost/CarSore-Topicos/public/api/register",//aqui pon el link que tu tienes
             formData,
             {
                 headers: {
