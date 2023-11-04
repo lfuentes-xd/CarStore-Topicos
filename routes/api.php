@@ -10,7 +10,14 @@ use App\Http\Controllers\AuthenticationController;
 //    return $request->user();
 //});
 Route::post('/register', [AuthenticationController::class, 'register']);
-Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/login_user', [AuthenticationController::class, 'login_user']);
+Route::POST('/user_index', [AuthenticationController::class, 'user_index']);
+Route::post('/infoC', [CompradorController::class, 'create']);
+
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout', [AuthenticationController::class, 'logout']);
@@ -24,3 +31,6 @@ Route::get('/Car_index', [AutoController::class, 'index']);
 Route::get('/Car_brands', [AutoController::class, 'create']);
 Route::post('/insert', [AutoController::class, 'store']);
 Route::get('/Car_token', [AutoController::class, 'token']);
+
+
+

@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 function Register() {
 
     const [token, setToken] = useState(null);
@@ -15,12 +14,13 @@ function Register() {
 
     })
 
+
     const onChange = (e) => {
         e.persist();
         setFormValue({ ...formValue, [e.target.name]: e.target.value });
     }
-
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
         const formData = new FormData();
         formData.append("name", formValue.name);
@@ -28,25 +28,26 @@ function Register() {
         formData.append("password", formValue.password);
         formData.append("password_confirmation", formValue.password_confirmation);
 
-        axios.post("http://localhost/CarSore-Topicos/public/api/register",//aqui pon el link que tu tienes
+        const  response = await axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes 
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + token
 
                 }
             }).then(response => {
                 console.log("Registration successful. Response: ", response);
                 console.log("response: ");
                 console.log(response);
-                const token = response.data.token;//////////
-                setToken(token);////////////////
-                navigate("/login");//desde el nombre
+                
+                navigate("/ConsumerInf");//desde el nombre
+                console.log("errrrrr", response.status)
             }).catch(error => {
                 console.log("Error during registration: ", error);
-                console.log("cccc", error);
             });
+            
     };
     return (
         <div className="flex justify-center items-center mt-12">
@@ -73,7 +74,7 @@ function Register() {
 
                 <div className="">
 
-                    <PrimaryButton className="w-full">Register</PrimaryButton>
+                    <PrimaryButton className="w-full"  >Register</PrimaryButton>
                     <Link to="/login">
                         <PrimaryButton className="bg-red-600 hover:bg-red-800 w-full mt-3">Regresar</PrimaryButton>
                     </Link>
