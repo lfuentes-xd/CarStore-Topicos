@@ -2,12 +2,15 @@ import TextInput from "../../components/TextInput";
 import InputLabel from "../../components/Inputlabel";
 import PrimaryButton from "../../components/PrimaryButton";
 import { Link } from "react-router-dom";
-import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
+import React, { useState, useEffect } from "react";
 function LoginForm() {
+
+    
+    
 
     const [token, setToken] = useState(null);
     const navigate = useNavigate();
@@ -40,20 +43,20 @@ function LoginForm() {
                 console.log("login successful. Response: ", response);
                 console.log("response: ");
                 console.log(response);
-                
+                                
                 navigate("/Home");//desde el nombre
             }).catch(error => {
                 console.log("Error during login: ", error);
                 console.log("cccc", error);
+                alert("La contraseña o el usuario estan incorrectas ");
+                
+                
             });
-            if (response.status === 200) {
-                console.log("Rlogin successful. Response: ", response.data);
-                navigate("/Home");
-              } else {
-                console.error("Error during login: ", response);
-                console.log("Error Status Code: ", response.status);
-              }
+            
+            
     };
+
+    
     return (
         <div className="flex justify-center items-center mt-12">
             <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
