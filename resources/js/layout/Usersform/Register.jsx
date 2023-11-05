@@ -19,7 +19,7 @@ function Register() {
         e.persist();
         setFormValue({ ...formValue, [e.target.name]: e.target.value });
     }
-    
+
     const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
         const formData = new FormData();
@@ -28,26 +28,25 @@ function Register() {
         formData.append("password", formValue.password);
         formData.append("password_confirmation", formValue.password_confirmation);
 
-        const  response = await axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes 
+        const  response = await axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Accept': 'application/json',
                     'Authorization': 'Bearer ' + token
-
                 }
             }).then(response => {
                 console.log("Registration successful. Response: ", response);
                 console.log("response: ");
                 console.log(response);
-                
+
                 navigate("/ConsumerInf");//desde el nombre
                 console.log("errrrrr", response.status)
             }).catch(error => {
                 console.log("Error during registration: ", error);
             });
-            
+
     };
     return (
         <div className="flex justify-center items-center mt-12">

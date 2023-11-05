@@ -31,33 +31,32 @@ class AutoController extends Controller
      */
     public function store(Request $request){
         $request->validate([
-            'Brand' => 'required',
-            'Model' => 'required',
-            'year' => 'required',
-            'color' => 'required',
-            'type' => 'required',
-            'fuel' => 'required',
-            'available' => 'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            // 'Id_marca_fk' => 'required',
+            'Modelo' => 'required',
+            'año' => 'required',
+            'Color' => 'required',
+            'Carroceria' => 'required',
+            't_combustible' => 'required',
+            'Existencias' => 'required',
+            // 'Image' => 'required|mimes:jpeg,png,jpg',
         ]);
 
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+        // $imageName = time() . '.' . $request->Image->extension();
+        // $request->Image->move(public_path('images'), $imageName);
 
         $auto = Auto::create([
-            'Id_marca_fk' => $request->Brand,
-            'Modelo' => $request->Model,
-            'año' => $request->year,
-            'Color' => $request->color,
-            'Carroceria' => $request->type,
-            't_combustible' => $request->fuel,
-            'Existencias' => $request->available,
-            'Image' => '/images/' . $imageName
+            // 'Id_marca_fk' => $request->Id_marca_fk,
+            'Id_marca_fk' => "1",
+            'Modelo' => $request->Modelo,
+            'año' => $request->año,
+            'Color' => $request->Color,
+            'Carroceria' => $request->Carroceria,
+            't_combustible' => $request->t_combustible,
+            'Existencias' => $request->Existencias,
+            'Image'=> 'prueba'
+            // 'Image' =>  $imageName
         ]);
 
-        return back()
-            ->with('success', 'Auto registrado exitosamente.');
-            // ->with('image', $imageName);
     }
 
     /**

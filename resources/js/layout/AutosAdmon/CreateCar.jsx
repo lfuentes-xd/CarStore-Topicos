@@ -12,7 +12,7 @@ function CreateCars() {
     const [brands, setBrands] = useState([]);
     const [setToken] = useState(null);
     const [formValue, setFormValue] = useState({})
-    const token = "VAnzYwlgHeDMABVJie55hmM4EYgyYLra5JuirdaA";
+    const token = "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk";
 
 
     const fuelOptions = [
@@ -29,7 +29,7 @@ function CreateCars() {
 
     //para poner los datos en las marcas
     useEffect(() => {
-        axios.get('http://localhost/CarSore-TopicClass/public/api/Car_brands')
+        axios.get('http://localhost/CarStore-Topicos/public/api/Car_brands')
             .then(response => {
                 setBrands(response.data);
             })
@@ -38,41 +38,48 @@ function CreateCars() {
             });
     }, []);
 
-
     const onChange = (e) => {
         e.persist();
-        setFormValue({ ...formValue, [e.target.name]: e.target.value });
+        const name = e.target.name;
+        const value = e.target.value;
+        setFormValue({ ...formValue, [name]: value });
     }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
-        const formData = new FormData();
-        formData.append("Brand", formValue.brand);
-        formData.append("Model", formValue.Model);
-        formData.append("year", formValue.year);
-        formData.append("color", formValue.color);
-        formData.append("type", formValue.type);
-        formData.append("fuel", formValue.fuel);
-        formData.append("available", formValue.available);
-        // formData.append("image", formValue.image);
 
-        axios.post('http://localhost/CarSore-TopicClass/public/api/insert',
-        formData,
+        const formData = new FormData();
+        // formData.append("Id_marca_fk", formValue.Id_marca_fk);
+        formData.append("Modelo", formValue.Modelo);
+        formData.append("año", formValue.año);
+        formData.append("Color", formValue.Color);
+        formData.append("Carroceria", formValue.Carroceria);
+        formData.append("t_combustible", formValue.t_combustible);
+        formData.append("Existencias", formValue.Existencias);
+        // formData.append("Image", formValue.Image);
+
+        const response = await axios.post(
+            "http://localhost/CarStore-Topicos/public/api/insert",
+            formData,
             {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Accept': 'application/json',
+                    "Content-Type": "multipart/form-data",
+                    Accept: "application/json",
+                    "X-CSRF-TOKEN": "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk"
                 }
-            }).then(response => {
-                console.log("Registration successful. Response: ", response);
-                console.log("response: ");
-                console.log(response);
-                navigate("/SellsAdmon");
-            }).catch(error => {
-                console.log("Error during the registration: ", error);
-                // console.log("cccc", error);
-            });
+
+            }
+        );
+
+        // Add a console log to see the response object before the if statement
+        console.log(response);
+
+        if (response.status === 200) {
+            console.log("Registration successful!");
+        } else {
+            console.log("Error during registration: ", response.data.message);
+        }
     };
+
     return (
         <>
             <div className="Container my-12">
@@ -81,43 +88,43 @@ function CreateCars() {
                     <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
 
                         <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="brand" value="Marca del auto" />
-                            <SelectInput id="brand" name="brand" options={brands.map(brand => ({ value: brand.id, label: brand.Descripción }))} value={formValue.brand} onChange={onChange} className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Id_marca_fk" value="Marca del auto" />
+                            <SelectInput id="Id_marca_fk" name="Id_marca_fk" options={brands.map(brand => ({ value: brand.id, label: brand.Descripción }))} value={formValue.Id_marca_fk} onChange={onChange} className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Model" value="Modelo" />
-                            <TextInput id="Model" value={formValue.Model} type="text" name="Model" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                            <InputLabel htmlFor="Modelo" value="Modelo del auto" />
+                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                        </div>
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="año" value="Año del vehiculo" />
+                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                        </div>
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="Color" value="Color" />
+                            <TextInput value={formValue.Color} onChange={onChange} id="Color" type="text" name="Color" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                        </div>
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="Carroceria" value="Carroceria" />
+                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
                         </div>
 
                         <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="year" value="Año" />
-                            <TextInput id="year" value={formValue.year} type="text" name="year" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="t_combustible" value="Tipo de combustible." />
+                            <SelectInput value={formValue.t_combustible} onChange={onChange} options={fuelOptions} id="t_combustible" name="t_combustible" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="color" value="color" />
-                            <TextInput val id="color" value={formValue.color} type="text" name="color" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Existencias" value="¿Disponible?" />
+                            <SelectInput value={formValue.Existencias} onChange={onChange}  options={AvailableOptions} id="Existencias" name="Existencias" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
-                        <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="type" value="Carroceria" />
-                            <TextInput id="type" value={formValue.type} type="text" name="type" className="mt-1 block w-full p-2 border border-black" required />
-                        </div>
-
-                        <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="fuel" value="Tipo de combustible." />
-                            <SelectInput id="fuel" name="fuel" value={formValue.fuel} options={fuelOptions} onChange={onChange} className="mt-1 block w-full p-2 border border-black" required />
-                        </div>
-
-                        <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="Available" value="¿Disponible?" />
-                            <SelectInput id="Available" name="Available" options={AvailableOptions} value={formValue.available} onChange={onChange} className="mt-1 block w-full p-2 border border-black" required />
-                        </div>
-{/*
-                        <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="image" value="Subir imagen." />
-                            <FileInput id="image" value={formValue.image} name="image" className="mt-1 block w-full p-2 border border-black"/>
+                        {/* <div className="mt-4 mb-4">
+                            <InputLabel htmlFor="Image" value="Subir imagen." />
+                            <FileInput value={formValue.Image} onChange={onChange} id="Image" name="Image" className="mt-1 block w-full p-2 border border-black"/>
                         </div> */}
 
                         <div className="">
