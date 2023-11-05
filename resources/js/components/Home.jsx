@@ -1,6 +1,13 @@
 import image from '../../Images/altima.jpeg';
 
+import axios from "axios";
+
+import React, { useState, useEffect } from "react";
+
 function Home() {
+    
+
+
     return (
         <>
             <div className="flex my-10 h-screen  rounded-lg ">
@@ -13,6 +20,7 @@ function Home() {
                     <p className='mx-5 my-10 text-justify'>
                         En CarStore México, los autos son nuestra pasión. Cada vehículo que llega a nuestra sala de exhibición es seleccionado cuidadosamente para brindarte solo lo mejor en automóviles de alta gama. Nuestro compromiso con la excelencia se refleja en cada detalle, desde el diseño de vanguardia hasta las características de última generación.
                     </p>
+                    
                 </div>
             </div>
 

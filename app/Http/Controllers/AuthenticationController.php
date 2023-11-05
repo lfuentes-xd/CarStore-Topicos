@@ -41,7 +41,7 @@ class AuthenticationController extends Controller
             return response([
                 'message'=>'The provided credential are incorrect'
                 
-            ]);
+            ], 401);
         }
         $token=$user->createToken('auth_token')->accessToken;   
 

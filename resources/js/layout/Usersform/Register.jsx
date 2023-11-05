@@ -45,9 +45,12 @@ function Register() {
                 console.log("errrrrr", response.status)
             }).catch(error => {
                 console.log("Error during registration: ", error);
+                alert("Contraseñas incorrectas, deben de ser iguales y de 8 caracteres como mínimmo ");
+                
             });
 
     };
+    
     return (
         <div className="flex justify-center items-center mt-12">
             <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
