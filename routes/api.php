@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AutoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CompradorController;
 
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -11,7 +12,7 @@ use App\Http\Controllers\AuthenticationController;
 //});
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login_user', [AuthenticationController::class, 'login_user']);
-Route::POST('/user_index', [AuthenticationController::class, 'user_index']);
+Route::middleware('auth:api')->get('/user_index', [AuthenticationController::class, 'user_index']);
 Route::post('/infoC', [CompradorController::class, 'create']);
 
 

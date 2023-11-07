@@ -18,9 +18,29 @@ class CompradorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $request->validate([
+            'teléfono' => 'required',
+            'calle' => 'required',
+            'N_casa' => 'required',
+            'Nombre' => 'required',
+            'per_apellido' => 'required',
+            'sdo_apellido' => 'required',
+            'id_usuario' => 'required',
+        ]);
+        $comprador = Comprador::create([
+            'teléfono' => $request->teléfono,
+            'calle' => $request->calle,
+            'N_casa' => $request->N_casa,
+            'Nombre' => $request->Nombre,
+            'per_apellido' => $request-> per_apellido,
+            'sdo_apellido' => $request-> sdo_apellido,
+            'id_usuario' => $request-> id_usuario,
+
+        ]);
+       
     }
 
     /**

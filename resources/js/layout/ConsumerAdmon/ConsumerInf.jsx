@@ -5,30 +5,44 @@ import PrimaryButton from "../../components/PrimaryButton";
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
-import {useEffect} from "react";
-import {Navigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 
 function ConsumerInf() {
 
-    const [token, setToken] = useState(null);
-    const [formValue, setFormValue] = useState( false);
+    //const [token, setToken] = useState(null);
+    const [formValue, setFormValue] = useState(false);
     const [email, setEmail] = useState('');
-    const [navigate, setNavigate] = useState(false);
+   // const [navigate, setNavigate] = useState(false);
+
+    
+    const [userInfo, setUserInfo] = useState(null);
+    
+    const navigate = useNavigate();
+    const location = useLocation();//los importantes par  token
+    const token = location.state && location.state.token;//los importantes para token
+    const [userData, setUserData] = useState({});//para el token
+
+    console.log("este es p " + token);
+
+
 
     useEffect(() => {
-        (async () => {
-            try {
-                const { data } = await axios.get('/user');
-
-                setEmail(data.email);
-            } catch (e) {
-                setNavigate(true);
-            }
-        })();
-    }, []);
+        if (token) {
+            axios.get("http://localhost/CarStore-Topicos/public/api/user_index", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => setUserData(response.data))
+                .catch(error => {
+                    console.log("Error al obtener información del usuario: ", error);
+                });
+        }
+    }, [token]);
+    console.log("role en consumerinf"+userData.role);
 
     const onChange = (e) => {
         e.persist();
@@ -38,28 +52,30 @@ function ConsumerInf() {
     const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
         const formData = new FormData();
+        formData.append("id_usuario", userData.id );
         formData.append("teléfono", formValue.teléfono);
         formData.append("calle", formValue.calle);
         formData.append("N_casa", formValue.N_casa);
-        formData.append("Nombre(s)", formValue.Nombre(s));
-        formData.append("1er_apellido", formValue.per_apellido);
-        formData.append("2do_apellido", formValue.sdo_apellido);
+        formData.append("Nombre", formValue.Nombre);
+        formData.append("per_apellido", formValue.per_apellido);
+        formData.append("sdo_apellido", formValue.sdo_apellido);
 
-        const { data } = await axios.post("http://localhost/CarStore-Topicos/public/api/infoC",//aqui pon el link que tu tienes 
+        const response = await axios.post("http://localhost/CarStore-Topicos/public/api/infoC",//aqui pon el link que tu tienes 
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': `Bearer ${token}`
 
                 }
+                
             }).then(response => {
                 console.log("Registration successful. Response: ", response);
-                console.log("response: ");
-                console.log(response);
+               
 
-                navigate("/ConsumerInf");//desde el nombre
+                console.log("envio del "+token)
+                navigate("/", { state: { token } });//desde el nombre
             }).catch(error => {
                 console.log("Error during registration: ", error);
                 console.log("cccc", error);
@@ -67,9 +83,15 @@ function ConsumerInf() {
     };
     return (
         <div className="flex justify-center items-center mt-12">
-            <h1>H{email}ola </h1>
-            <br />
+            <div>
+                <h1 style={{ position: 'absolute', fontFamily: 'Arial, sans-serif', fontSize: '24px', top: '80px', color: '#7D7C7B' }}>welcome {userData.name} con id: {userData.id} y role {userData.role}</h1>
+            </div>
             <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
+                <div className="mt-4 mb-4" style={{display: 'none'}}>
+                    <InputLabel htmlFor="id_user" value="id_user" />
+                    <TextInput value={formValue.id_user} onChange={onChange} id="id_user" type="number" name="id_user" className="mt-1 block w-full p-2 border border-black" autoComplete="username"  />
+                </div>
+
                 <div className="mt-4 mb-4" >
                     <InputLabel htmlFor="PhoneNumber" value="Phone Number" />
                     <TextInput value={formValue.email} onChange={onChange} id="teléfono" type="number" name="teléfono" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
@@ -87,7 +109,7 @@ function ConsumerInf() {
 
                 <div className="mt-4 mb-4">
                     <InputLabel htmlFor="names" value="Name(s)" />
-                    <TextInput value={formValue.password_confirmation} onChange={onChange} id="Nombre(s)" type="text" name="Nombre(s)" className="mt-1 block w-full p-2 border border-black" required />
+                    <TextInput value={formValue.password_confirmation} onChange={onChange} id="Nombre" type="text" name="Nombre" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
                 <div className="mt-4 mb-4">
                     <InputLabel htmlFor="Fname" value="First surname" />

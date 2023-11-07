@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
 
-    const [token, setToken] = useState(null);
     const navigate = useNavigate();
     const [formValue, setFormValue] = useState({
 
-    })
+    });
+    const [token, setToken] = useState(null);//token
 
 
     const onChange = (e) => {
@@ -27,30 +27,35 @@ function Register() {
         formData.append("email", formValue.email);
         formData.append("password", formValue.password);
         formData.append("password_confirmation", formValue.password_confirmation);
+        formData.append("role", 1);
 
-        const  response = await axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes
+        const response = await axios.post("http://localhost/CarStore-Topicos/public/api/register",//aqui pon el link que tu tienes
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': `Bearer ${token}`
                 }
             }).then(response => {
                 console.log("Registration successful. Response: ", response);
-                console.log("response: ");
-                console.log(response);
+                
+               // console.log(response);
+                const token = response.data.token;//valor del token
+                setToken(token);
+                console.log("tokem: " + token);
 
-                navigate("/ConsumerInf");//desde el nombre
-                console.log("errrrrr", response.status)
+
+                navigate("/ConsumerInf", { state: { token } });//desde el nombre
+             
             }).catch(error => {
                 console.log("Error during registration: ", error);
                 alert("Contraseñas incorrectas, deben de ser iguales y de 8 caracteres como mínimmo ");
-                
+
             });
 
     };
-    
+
     return (
         <div className="flex justify-center items-center mt-12">
             <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
@@ -77,6 +82,10 @@ function Register() {
                 <div className="">
 
                     <PrimaryButton className="w-full"  >Register</PrimaryButton>
+                    <Link to="/AdPassword">
+                        <PrimaryButton className="bg-red-600 hover:bg-red-800 w-full mt-3">Administrador</PrimaryButton>
+                    </Link>
+                    
                     <Link to="/login">
                         <PrimaryButton className="bg-red-600 hover:bg-red-800 w-full mt-3">Regresar</PrimaryButton>
                     </Link>

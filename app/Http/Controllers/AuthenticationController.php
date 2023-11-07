@@ -15,12 +15,14 @@ class AuthenticationController extends Controller
             'email'=>'required|unique:users|max:255',
             'password'=>'required|min:8',
             'password_confirmation'=>'same:password|required'
+            
 
         ]);
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=> Hash::make($request->password)
+            'password'=> Hash::make($request->password),
+            'role'=>$request->role
         ]);
 
         $token=$user->createToken('auth_token')->accessToken;
@@ -69,7 +71,20 @@ class AuthenticationController extends Controller
     }
     public function user_index()
     {
-        $users = DB::table('users')->get();
-        return $users;
+            // Recupera el usuario autenticado
+    $user = auth()->user();
+
+    // Verifica si el usuario está autenticado
+    if ($user) {
+        return response()->json([
+            'id'=> $user->id,
+            'email' => $user->email,
+            'name' => $user->name,
+            'role'=>$user->role,
+            // Otros datos del usuario si es necesario
+        ]);
+    }
+
+    return response()->json(['error' => 'Usuario no autenticado'], 401);
     }
 }

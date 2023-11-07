@@ -17,9 +17,9 @@ return new class extends Migration
             $table->bigInteger('teléfono');
             $table->string('calle');
             $table->string('N_casa');
-            $table->string('Nombre(s)');
-            $table->string('1er_apellido');
-            $table->string('2do_apellido');
+            $table->string('Nombre');
+            $table->string('per_apellido');
+            $table->string('sdo_apellido');
             $table->timestamps();
 
             $table->foreign('id_usuario')->references('id')->on('users');
