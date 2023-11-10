@@ -7,14 +7,17 @@ import { useNavigate } from "react-router-dom";
 
 
 import React, { useState, useEffect } from "react";
+import  {  useContext } from "react";
+import { AuthContext } from "../../components/AuthProvider";
+
+
 function LoginForm() {
 
-    
-    
-
+   // const { setAuth } = useContext(AuthContext);
 
     const [token, setToken] = useState(null);//token
     const navigate = useNavigate();
+    const { setAuth } = useContext(AuthContext);
     const [formValue, setFormValue] = useState({
 
     })
@@ -42,6 +45,7 @@ function LoginForm() {
                 }
             }).then(response => {
                 const token = response.data.token;//valor del token
+                setAuth({ token });
                 setToken(token);
                 console.log("login successful. Response: ", response);
                 console.log("tokem: " + token);
