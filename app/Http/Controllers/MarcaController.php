@@ -12,7 +12,8 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        //
+        $marca = Marca::all();
+        return $marca;
     }
 
     /**
@@ -28,7 +29,15 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'Descripción'=>'required'
+            ]
+            );
+
+        $marca = Marca::create([
+            'Descripción'=> $request->Descripción
+        ]);
     }
 
     /**
@@ -58,8 +67,8 @@ class MarcaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Marca $marca)
+    public function destroy(String $id)
     {
-        //
+        Marca::destroy($id);
     }
 }

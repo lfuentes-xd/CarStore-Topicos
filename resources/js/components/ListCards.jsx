@@ -7,7 +7,7 @@ function ListCards() {
     const [carData, setCarData] = useState({})
     useEffect(() => {
         const getCars = async () => {
-            await axios.get('http://localhost/CarSore-TopicClass/public/api/Car_index')
+            await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index')
                 .then(function (response) {
                     // handle success
                     console.log(response);
@@ -38,7 +38,7 @@ function ListCards() {
                     type={car.Carroceria}
                     fuel={car.t_combustible}
                     disponibility={car.Existencias}
-                    // image={Image}
+                    image={car.Image}
                 />
 
             ))}

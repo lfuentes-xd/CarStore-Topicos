@@ -29,35 +29,68 @@ class AutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request){
+    //     $request->validate([
+    //         'Id_marca_fk' => 'required',
+    //         'Modelo' => 'required',
+    //         'año' => 'required',
+    //         'Color' => 'required',
+    //         'Carroceria' => 'required',
+    //         't_combustible' => 'required',
+    //         'Existencias' => 'required',
+    //         // 'Image' => 'required|mimes:jpeg,png,jpg',
+    //     ]);
+
+    //     $imageName = time() . '.' . $request->Image->extension();
+    //     $request->Image->move(public_path('images'), $imageName);
+
+    //     $auto = Auto::create([
+    //         'Id_marca_fk' => $request->Id_marca_fk,
+    //         'Modelo' => $request->Modelo,
+    //         'año' => $request->año,
+    //         'Color' => $request->Color,
+    //         'Carroceria' => $request->Carroceria,
+    //         't_combustible' => $request->t_combustible,
+    //         'Existencias' => $request->Existencias,
+    //         // 'Image'=> 'prueba',
+    //         'Image' =>  $imageName
+    //     ]);
+    // }
     public function store(Request $request){
         $request->validate([
-            // 'Id_marca_fk' => 'required',
+            'Id_marca_fk' => 'required',
             'Modelo' => 'required',
             'año' => 'required',
             'Color' => 'required',
             'Carroceria' => 'required',
             't_combustible' => 'required',
             'Existencias' => 'required',
-            // 'Image' => 'required|mimes:jpeg,png,jpg',
+            'Image' => 'required|mimes:jpeg,png,jpg', // Añade validación de tipo de archivo si es necesario
         ]);
 
-        // $imageName = time() . '.' . $request->Image->extension();
-        // $request->Image->move(public_path('images'), $imageName);
+        if ($request->hasFile('Image')) {
+            // $customFileName = 'mi_archivo_personalizado.' . $request->file('Image')->getClientOriginalExtension();
+            $imagePath = $request->file('Image')->store('Images', 'public');
 
-        $auto = Auto::create([
-            // 'Id_marca_fk' => $request->Id_marca_fk,
-            'Id_marca_fk' => "1",
-            'Modelo' => $request->Modelo,
-            'año' => $request->año,
-            'Color' => $request->Color,
-            'Carroceria' => $request->Carroceria,
-            't_combustible' => $request->t_combustible,
-            'Existencias' => $request->Existencias,
-            'Image'=> 'prueba'
-            // 'Image' =>  $imageName
-        ]);
+            $auto = Auto::create([
+                'Id_marca_fk' => $request->Id_marca_fk,
+                'Modelo' => $request->Modelo,
+                'año' => $request->año,
+                'Color' => $request->Color,
+                'Carroceria' => $request->Carroceria,
+                't_combustible' => $request->t_combustible,
+                'Existencias' => $request->Existencias,
+                'Image' => $imagePath, // Guarda la ruta personalizada en lugar del nombre generado automáticamente
+            ]);
 
+            // Resto del código de almacenamiento
+        }
+
+        // Manejar cualquier validación adicional o respuestas de error aquí
+
+        // Redireccionar o devolver una respuesta según sea necesario
     }
+
 
     /**
      * Display the specified resource.
@@ -86,9 +119,9 @@ class AutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Auto $auto)
+    public function destroy(String $id)
     {
-        //
+        Auto::destroy($id);
     }
 
     public function token(){

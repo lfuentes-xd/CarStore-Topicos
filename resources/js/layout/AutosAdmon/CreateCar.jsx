@@ -1,31 +1,20 @@
 import TextInput from "../../components/TextInput"
 import InputLabel from "../../components/Inputlabel"
 import PrimaryButton from "../../components/PrimaryButton"
-import SelectInput from "../../components/InputSelect"
+// import SelectInput from "../../components/InputSelect"
 import BackIcon from "../../../Images/Icons/Back.png"
 import LinktoButton from "../../components/LinktoButton"
-import FileInput from "../../components/Fileinput"
+// import FileInput from "../../components/Fileinput"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function CreateCars() {
-    const [brands, setBrands] = useState([]);
+    const [brands, setBrands] = useState([
+    ]);
     const [setToken] = useState(null);
     const [formValue, setFormValue] = useState({})
-    const token = "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk";
-
-
-    const fuelOptions = [
-        { value: "gasolina", label: "Gasolina" },
-        { value: "diesel", label: "Diesel" },
-        { value: "electrico", label: "Electrico" },
-        { value: "hibrido", label: "Hibrido" },
-    ];
-    const AvailableOptions = [
-        { value: "1", label: "Disponible" },
-        { value: "0", label: "Sin existencias" },
-    ];
-
+    const navigate = useNavigate();
 
     //para poner los datos en las marcas
     useEffect(() => {
@@ -41,14 +30,16 @@ function CreateCars() {
     const onChange = (e) => {
         e.persist();
         const name = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === 'select-one' ? e.target.options[e.target.selectedIndex].value : e.target.value;
         setFormValue({ ...formValue, [name]: value });
     }
+
+
     const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
 
         const formData = new FormData();
-        // formData.append("Id_marca_fk", formValue.Id_marca_fk);
+        formData.append("Id_marca_fk", formValue.Id_marca_fk);
         formData.append("Modelo", formValue.Modelo);
         formData.append("año", formValue.año);
         formData.append("Color", formValue.Color);
@@ -56,6 +47,8 @@ function CreateCars() {
         formData.append("t_combustible", formValue.t_combustible);
         formData.append("Existencias", formValue.Existencias);
         // formData.append("Image", formValue.Image);
+        formData.append("Image", e.target.elements.Image.files[0]); // Adjunta el archivo
+
 
         const response = await axios.post(
             "http://localhost/CarStore-Topicos/public/api/insert",
@@ -63,8 +56,8 @@ function CreateCars() {
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json",
-                    "X-CSRF-TOKEN": "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk"
+                    Accept: "application/json"
+                    // "X-CSRF-TOKEN": "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk"
                 }
 
             }
@@ -75,6 +68,7 @@ function CreateCars() {
 
         if (response.status === 200) {
             console.log("Registration successful!");
+            navigate("/CarsAdmon");//desde el nombre
         } else {
             console.log("Error during registration: ", response.data.message);
         }
@@ -85,47 +79,67 @@ function CreateCars() {
             <div className="Container my-12">
                 <h1 className="text-xl text-center">Agregar auto</h1>
                 <div className="flex justify-center items-center">
-                    <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
+
+                    <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }} encType="multipart/form-data">
 
                         <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Id_marca_fk" value="Marca del auto" />
-                            <SelectInput id="Id_marca_fk" name="Id_marca_fk" options={brands.map(brand => ({ value: brand.id, label: brand.Descripción }))} value={formValue.Id_marca_fk} onChange={onChange} className="mt-1 block w-full p-2 border border-black" required />
+
+                            <select value={formValue.Id_marca_fk} onChange={onChange} id="Id_marca_fk" name="Id_marca_fk" className="mt-1 block w-full p-2 border border-black">
+                                <option value="0">Selecciona una marca</option>
+                                {brands.map(brand => (
+                                    <option key={brand.id} value={brand.id}>
+                                        {brand.Descripción}
+                                    </option>
+                                ))}
+                            </select>
+
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Modelo" value="Modelo del auto" />
-                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="año" value="Año del vehiculo" />
-                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Color" value="Color" />
-                            <TextInput value={formValue.Color} onChange={onChange} id="Color" type="text" name="Color" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                            <TextInput value={formValue.Color} onChange={onChange} id="Color" type="text" name="Color" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Carroceria" value="Carroceria" />
-                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
-                        <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="t_combustible" value="Tipo de combustible." />
-                            <SelectInput value={formValue.t_combustible} onChange={onChange} options={fuelOptions} id="t_combustible" name="t_combustible" className="mt-1 block w-full p-2 border border-black" required />
-                        </div>
+                        <select value={formValue.t_combustible} onChange={onChange} id="t_combustible" name="t_combustible" className="mt-1 block w-full p-2 border border-black">
+                            <option value="0">Selecciona un tipo de combustible</option>
+                            <option value="gasolina">Gasolina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electrico">Electrico</option>
+                            <option value="hibrido">Hibrido</option>
+                        </select>
+
 
                         <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Existencias" value="¿Disponible?" />
-                            <SelectInput value={formValue.Existencias} onChange={onChange}  options={AvailableOptions} id="Existencias" name="Existencias" className="mt-1 block w-full p-2 border border-black" required />
+
+                        <select value={formValue.Existencias} onChange={onChange} id="Existencias" name="Existencias" className="mt-1 block w-full p-2 border border-black">
+                            <option value="0">Selecciona una opcion</option>
+                            <option value="1">Disponible</option>
+                            <option value="2">Sin disponibilidad</option>
+                        </select>
+
                         </div>
 
-                        {/* <div className="mt-4 mb-4">
+                        <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Image" value="Subir imagen." />
-                            <FileInput value={formValue.Image} onChange={onChange} id="Image" name="Image" className="mt-1 block w-full p-2 border border-black"/>
-                        </div> */}
+                            <input value={formValue.Image} onChange={onChange} id="Image" name="Image" className="mt-1 block w-full p-2 border border-black" type="file"/>
+                        </div>
 
                         <div className="">
                             <PrimaryButton className="w-full">Registrar</PrimaryButton>

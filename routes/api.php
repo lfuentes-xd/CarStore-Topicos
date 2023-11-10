@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\AutoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\AuthenticationController;
 
 
@@ -31,6 +32,11 @@ Route::get('/Car_index', [AutoController::class, 'index']);
 Route::get('/Car_brands', [AutoController::class, 'create']);
 Route::post('/insert', [AutoController::class, 'store']);
 Route::get('/Car_token', [AutoController::class, 'token']);
+Route::post('/car/{id}/delete', [AutoController::class, 'destroy']);
 
+
+Route::get('/Brands_index', [Marcacontroller::class, 'index']);
+Route::post('/insertBrand', [MarcaController::class, 'store']);
+Route::post('/Brands/{id}/delete', [MarcaController::class,'destroy']);
 
 

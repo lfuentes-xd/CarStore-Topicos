@@ -1,21 +1,34 @@
-import React from "react";
-import Image from '../../Images/altima.jpeg'
-// import Image from "storage\app\public\Images\R.png"
+import React, { useState } from "react"
+import NextIcon from "../../Images/Icons/Next.png"
+import ViewCar from "../layout/AutosAdmon/ViewCar";
+
 
 function Cards(props) {
+    const [showCarInfo, setShowCarInfo] = useState(false);
     const model = props.model;
     const year = props.year;
     const color = props.color;
     const type = props.type; // Cambio aquí
     const fuel = props.fuel;
     const disponibility = props.disp;
-    // const Image = props.Image;
+    const Image = props.image;
+
+    if(showCarInfo){
+        return <ViewCar
+        model={model}
+        year={year}
+        color={color}
+        type={type}
+        fuel={fuel}
+        disponibility={disponibility}
+        image={Image}
+        setShowCarInfo={setShowCarInfo}
+        />
+    }
 
     return (
-        <div className="shadow-md border border-gray-200 rounded-lg max-w-sm bg-black dark:border-gray-700 text-white">
-            <a href="#">
-                <img className="rounded-t-lg" src={Image} alt=""/>
-            </a>
+        <div className="shadow-md border border-gray-200 rounded-lg max-w-sm bg-black dark:border-gray-700 text-white mx-auto">
+                <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/'+Image} alt=""/>
             <div className="p-5">
                 <a href="#">
                     <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">{model}</h5>
@@ -27,9 +40,9 @@ function Cards(props) {
                     Tipo de combustible: {fuel}<br/>
                     Disponible:{disponibility}
                 </p>
-                <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a onClick={() => setShowCarInfo(true)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Mas informacion
-                    <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path></svg>
+                    <img src={NextIcon} className="w-6 h-6" alt="" />
                 </a>
             </div>
         </div>

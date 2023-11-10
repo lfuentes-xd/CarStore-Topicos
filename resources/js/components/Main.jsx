@@ -8,6 +8,9 @@ import Cars from '../layout/Cars';
 import CarsAdmon from '../layout/AutosAdmon/Index';
 import SellsAdmon from '../layout/Sellsadmon/Index';
 import CreateCars from '../layout/AutosAdmon/CreateCar';
+import BrandsAdmon from '../layout/Brands/index'
+import CreateBrands from '../layout/Brands/Create'
+import ViewCar from '../layout/AutosAdmon/ViewCar'
 import { Routes, Route, Navigate } from "react-router-dom";
 function Main() {
     return (
@@ -21,6 +24,9 @@ function Main() {
                 <Route path="CarsAdmon" element={<CarsAdmon/>} />
                 <Route path="SellsAdmon" element={<SellsAdmon/>} />
                 <Route path="CreateCars" element={<CreateCars/>} />
+                <Route path="BrandsAdmon" element={<BrandsAdmon/>} />
+                <Route path="CreateBrands" element={<CreateBrands/>} />
+                <Route path="ViewCar" element={<ViewCar/>} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Route>
         </Routes>
