@@ -1,21 +1,6 @@
     import { Outlet, Link } from 'react-router-dom';
     import Icon from './Icon';
 
-<<<<<<< HEAD
-function Menu() {
-    return (
-        <>
-            <nav className="bg-black">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="ml-10 flex items-baseline space-x-4">
-                            <Icon className="text-white font-cursiva "></Icon>
-                            <Link to="home" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium">Pagina principal</Link>
-                            <Link to="Cars" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Autos</Link>
-                            <Link to="CarsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administracion de autos</Link>
-                            <Link to="BrandsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Marcas</Link>
-                            <Link to="SellsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ventas</Link>
-=======
     import axios from "axios";
 
     import React, { useState, useEffect } from "react";
@@ -33,7 +18,7 @@ function Menu() {
         const [userInfo, setUserInfo] = useState(null);
         const [userData, setUserData] = useState({});//para el token
         const navigate = useNavigate();
-        
+
         console.log("este es token en menu " + token);
 
 
@@ -161,12 +146,13 @@ function Menu() {
                                     <Link to="home" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium">Pagina principal</Link>
                                     <Link to="Cars" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Autos</Link>
 
+                                    <Link to="CarsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administracion de autos</Link>
+                            <Link to="BrandsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Marcas</Link>
                                     <Link to="SellsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ventas</Link>
                                 </div>
 
                                 <Link to="login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
                             </div>
->>>>>>> 38211a62f074865df6a7f0ec1c1b6d656364c969
                         </div>
                     </nav>
                     <section>
