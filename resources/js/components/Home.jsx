@@ -3,14 +3,52 @@ import image from '../../Images/altima.jpeg';
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
+//import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
+import Icon from './Icon';
+
+
+
 
 function Home() {
-    
+    const navigate = useNavigate();
+    const location = useLocation();//los importantes par  token
+    var token = location.state && location.state.token;//los importantes para token
+    const queryParams = new URLSearchParams(location.search);;
+     
+
+    if (token === null) {
+        console.log("entro"); 
+        console.log("querry"+ queryParams);
+        token = queryParams.get('token');
+        console.log("entro token" + token);
+    }
+    const [userData, setUserData] = useState({});//para el token
+
+
+    useEffect(() => {
+        if (token) {
+            axios.get("http://localhost/CarStore-Topicos/public/api/user_index", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => setUserData(response.data))
+                .catch(error => {
+                    console.log("Error al obtener información del usuario: ", error);
+                });
+        }
+    }, [token]);
+    console.log("role en consumerinf" + userData.role);
 
 
     return (
         <>
+
             <div className="flex my-10 h-screen  rounded-lg ">
+
                 <div className="w-1/2 h-full lg:block flex ">
                     <img src={image} alt="Car Image" className="w-full h-full object-cover transition-opacity duration-500" />
                 </div>
@@ -20,7 +58,7 @@ function Home() {
                     <p className='mx-5 my-10 text-justify'>
                         En CarStore México, los autos son nuestra pasión. Cada vehículo que llega a nuestra sala de exhibición es seleccionado cuidadosamente para brindarte solo lo mejor en automóviles de alta gama. Nuestro compromiso con la excelencia se refleja en cada detalle, desde el diseño de vanguardia hasta las características de última generación.
                     </p>
-                    
+
                 </div>
             </div>
 
@@ -38,7 +76,7 @@ function Home() {
                             Ver más
                             <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fillrule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path>
-                                </svg>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -78,5 +116,7 @@ function Home() {
         </>
     )
 }
+
+
 
 export default Home;
