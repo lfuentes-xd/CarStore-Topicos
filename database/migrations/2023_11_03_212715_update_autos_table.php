@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::table('autos', function (Blueprint $table) {
             $table->String('Image',250);
+            $table->string('Km', 250);
+            $table->string('version', 250);
+            $table->string('TM',250);
+            $table->string('liters',250);
+
         });
     }
 
@@ -23,6 +28,11 @@ return new class extends Migration
     {
         Schema::table('autos', function (Blueprint $table) {
             $table->dropColumn('Image');
+            $table->dropColumn('Km');
+            $table->dropColumn('version');
+            $table->dropColumn('TM');
+            $table->dropColumn('liters');
+
         });
     }
 };
