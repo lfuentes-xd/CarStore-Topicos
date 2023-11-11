@@ -34,6 +34,7 @@ Route::get('/Car_brands', [AutoController::class, 'create']);
 Route::post('/insert', [AutoController::class, 'store']);
 Route::get('/Car_token', [AutoController::class, 'token']);
 Route::post('/car/{id}/delete', [AutoController::class, 'destroy']);
+Route::put('/Updatecar/{id}',[AutoController::class, 'update']);
 
 
 Route::get('/Brands_index', [Marcacontroller::class, 'index']);

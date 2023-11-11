@@ -110,11 +110,32 @@ class AutoController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
-    public function update(Request $request, Auto $auto)
-    {
-        //
+     */public function update(Request $request, String $id)
+{
+    // Validar la solicitud
+    // $request->validate([
+    //     'Modelo' => 'required',
+    //     'año' => 'required',
+    //     'Color' => 'required',
+    //     'Carroceria' => 'required',
+    // ]);
+
+    $car = Auto::find($id);
+
+    if (!$car) {
+        return response()->json(['error' => 'Auto no encontrado'], 404);
     }
+
+    $car->update([
+        'Modelo' => $request->Modelo,
+        'año' => $request->año,
+        'Color' => $request->Color,
+        'Carroceria' => $request->Carroceria,
+    ]);
+
+    return response()->json(['message' => 'Auto actualizado exitosamente', 'data' => $car]);
+}
+
 
     /**
      * Remove the specified resource from storage.

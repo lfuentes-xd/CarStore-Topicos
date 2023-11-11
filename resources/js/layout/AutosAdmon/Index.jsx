@@ -3,11 +3,13 @@ import Plusicon from "../../../Images/Icons/add.png"
 import DeleteIcon from "../../../Images/Icons/delete.png"
 import EditIcon from "../../../Images/Icons/edit.png"
 import LinktoButton from "../../components/LinktoButton"
+import { useNavigate } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
 function CarsAdmon() {
     const [cars, setCars] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +29,10 @@ function CarsAdmon() {
         } catch (error) {
             console.error('Error al eliminar el vehículo', error);
         }
+    };
+
+    const handleModifyClick = (car) =>{
+        navigate('/ModifyCar', {state:car})
     };
 
     return (
@@ -65,7 +71,7 @@ function CarsAdmon() {
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Modelo}</td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.año}</td>
                                                 <td>
-                                                    <PrimaryButton className="bg-gray-600 text-black">
+                                                    <PrimaryButton onClick={() => handleModifyClick(car)} className="bg-gray-600 text-black">
                                                         modificar vehiculo
                                                         <img src={EditIcon} alt="" className="ml-2 w-4 h-4" />
                                                     </PrimaryButton>

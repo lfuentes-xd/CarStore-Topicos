@@ -16,6 +16,7 @@ import ViewCar from '../layout/AutosAdmon/ViewCar'
 import { Routes, Route, Navigate } from "react-router-dom";
 import ConsumerInf from '../layout/ConsumerAdmon/ConsumerInf';
 import MarcaC from '../layout/MarcaAdmon/MarcaC';
+import ModifyCar from '../layout/AutosAdmon/Modifycar';
 import { AuthProvider } from './AuthProvider';
 
 function Main() {
@@ -38,6 +39,7 @@ function Main() {
                     <Route path="BrandsAdmon" element={<BrandsAdmon />} />
                     <Route path="CreateBrands" element={<CreateBrands />} />
                     <Route path="ViewCar" element={<ViewCar />} />
+                    <Route path="ModifyCar" element={<ModifyCar />} />
                     <Route path="*" element={<Navigate replace to="/" />} />
                 </Route>
             </Routes>
