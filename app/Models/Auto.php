@@ -29,7 +29,12 @@ class Auto extends Model
         'Carroceria',
         't_combustible',
         'Existencias',
-        'Image'
+        'Image',
+        'Km',
+        'version',
+        'TM',
+        'liters',
+        'price'
         // Otros campos que quieres que Laravel pueda asignar masivamente
     ];
 

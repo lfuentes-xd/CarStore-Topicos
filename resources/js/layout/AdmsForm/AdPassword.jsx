@@ -14,6 +14,7 @@ function AdPassword() {
             navigate('/AdRegister');
         } else {
             console.log("wrong password");
+            alert("contraseña incorrecta");
         }
     }
 

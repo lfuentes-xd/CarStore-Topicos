@@ -48,6 +48,11 @@ function CreateCars() {
         formData.append("Existencias", formValue.Existencias);
         // formData.append("Image", formValue.Image);
         formData.append("Image", e.target.elements.Image.files[0]); // Adjunta el archivo
+        formData.append("Km", formValue.Km);
+        formData.append("version", formValue.version);
+        formData.append("TM", formValue.TM);
+        formData.append("liters", formValue.liters);
+        formData.append("price", formValue.price);
 
 
         const response = await axios.post(
@@ -103,7 +108,7 @@ function CreateCars() {
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="año" value="Año del vehiculo" />
-                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.año} onChange={onChange} id="año" type="number" name="año" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
                         <div className="mt-4 mb-4" >
@@ -114,6 +119,27 @@ function CreateCars() {
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Carroceria" value="Carroceria" />
                             <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black"  required />
+                        </div>
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="Km" value="Km" />
+                            <TextInput value={formValue.Km} onChange={onChange} id="Km" type="text" name="Km" className="mt-1 block w-full p-2 border border-black"  required />
+                        </div>
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="version" value="Versión" />
+                            <TextInput value={formValue.version} onChange={onChange} id="version" type="text" name="version" className="mt-1 block w-full p-2 border border-black"  required />
+                        </div>
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="TM" value="Tipo de transmisión" />
+                            <TextInput value={formValue.TM} onChange={onChange} id="TM" type="text" name="TM" className="mt-1 block w-full p-2 border border-black"  required />
+                        </div>
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="liters" value="Capacidad de litros" />
+                            <TextInput value={formValue.liters} onChange={onChange} id="liters" type="text" name="liters" className="mt-1 block w-full p-2 border border-black"  required />
+                        </div>
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="price" value="Costo del carro" />
+                            <TextInput value={formValue.price} onChange={onChange} id="price" type="number" name="price" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
                         <select value={formValue.t_combustible} onChange={onChange} id="t_combustible" name="t_combustible" className="mt-1 block w-full p-2 border border-black">

@@ -6,7 +6,13 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import  {  useEffect } from "react";
+import  {  useContext } from "react";
+import { AuthContext } from "../../components/AuthProvider";
+
 function Register() {
+
+    const { setAuth } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const [formValue, setFormValue] = useState({
@@ -42,6 +48,8 @@ function Register() {
                 
                // console.log(response);
                 const token = response.data.token;//valor del token
+
+                setAuth({ token });
                 setToken(token);
                 console.log("tokem: " + token);
 

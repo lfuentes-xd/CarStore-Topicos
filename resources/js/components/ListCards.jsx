@@ -39,6 +39,12 @@ function ListCards() {
                     fuel={car.t_combustible}
                     disponibility={car.Existencias}
                     image={car.Image}
+                    Km={car.Km}
+                    version={car.version}
+                    TM={car.TM}
+                    liters={car.liters}
+                    price={car.price}
+                   
                 />
 
             ))}
