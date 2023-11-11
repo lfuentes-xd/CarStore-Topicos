@@ -65,7 +65,12 @@ class AutoController extends Controller
             'Carroceria' => 'required',
             't_combustible' => 'required',
             'Existencias' => 'required',
-            'Image' => 'required|mimes:jpeg,png,jpg', // Añade validación de tipo de archivo si es necesario
+            'Image' => 'required|mimes:jpeg,png,jpg',
+            'Km'=>'required',
+            'version'=>'required',
+            'TM'=>'required',
+            'liters'=>'required',
+            'price'=> 'required', // Añade validación de tipo de archivo si es necesario
         ]);
 
         if ($request->hasFile('Image')) {
@@ -80,7 +85,13 @@ class AutoController extends Controller
                 'Carroceria' => $request->Carroceria,
                 't_combustible' => $request->t_combustible,
                 'Existencias' => $request->Existencias,
-                'Image' => $imagePath, // Guarda la ruta personalizada en lugar del nombre generado automáticamente
+                'Image' => $imagePath,
+                'Km'=>$request->Km,
+                'version'=>$request->version,
+                'TM'=>$request->TM,
+                 'liters'=>$request->liters,
+                 'price'=>$request->price,
+                 // Guarda la ruta personalizada en lugar del nombre generado automáticamente
             ]);
 
             // Resto del código de almacenamiento

@@ -21,6 +21,12 @@ return new class extends Migration
             $table->String('t_combustible');
             $table->integer('Existencias');
             $table->timestamps();
+            $table->String('Image',250);
+            $table->string('Km', 250);
+            $table->string('version', 250);
+            $table->string('TM',250);
+            $table->string('liters',250);
+            $table->decimal('price', 10, 2);
             $table->foreign('Id_marca_fk')->references('id')->on('marcas');
         });
     }

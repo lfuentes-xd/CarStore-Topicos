@@ -31,6 +31,7 @@ Route::middleware('auth:api')->group(function(){
 
 Route::get('/Car_index', [AutoController::class, 'index']);
 Route::get('/Car_brands', [AutoController::class, 'create']);
+
 Route::post('/insert', [AutoController::class, 'store']);
 Route::get('/Car_token', [AutoController::class, 'token']);
 Route::post('/car/{id}/delete', [AutoController::class, 'destroy']);
