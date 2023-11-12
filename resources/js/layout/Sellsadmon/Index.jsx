@@ -52,21 +52,13 @@ function indexSell() {
 
     useEffect(() => {
         // Filtrar autos basados en el ID de usuario
-        console.log("userData.id:", userData.id);//hay datos 
-        console.log("VentasData antes del filtro:", ventasData);//hay datps
-    
-        const userId = userData.id;//covertimos a int pero creo que no es necesario porque ya esta en int solo
-        //son pruebas
-    
-        const filteredCars = ventasData.filter(venta => {
-            const idUsuarioFk = parseInt(venta.id_usuario_fk);//aqui esta el problema
-            //como eso biene de un arreglo no lo puedo comparar con userdata.id entonces trato de convertirlo a 
-            //entero pero como viene del arreglo me lo marca como nan que es que no puede converir
-            //eso a entero
-            console.log("Comparando:", idUsuarioFk, userId);
-            return idUsuarioFk === userId;
-        });
-    
+        console.log("userData.id:", userData.id);
+        console.log("VentasData antes del filtro:", ventasData);
+
+        const userId = userData.id;
+         
+        const filteredCars = ventasData.filter(venta => venta.id_usuario_fk === userId);
+      //  console.log("Comparando: ", venta.id_usuario_fk, userId);
         setFilteredCars(filteredCars);
     }, [ventasData, userData]);
     
