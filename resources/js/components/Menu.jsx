@@ -8,14 +8,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from './AuthProvider';
+import { AuthContext } from './AuthProvider';//token
 
 function Menu() {
+    const { logout } = useContext(AuthContext);//logout
+
     const [formValue, setFormValue] = useState(false);
     const [email, setEmail] = useState('');
     // const [navigate, setNavigate] = useState(false);
-    const { auth } = useContext(AuthContext);
-    const token = auth.token;
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
+    console.log("token menu auth es la b"+token)
 
     const location = useLocation();//los importantes par  token
    // const token = location.state && location.state.token;//los importantes para token
@@ -24,6 +28,15 @@ function Menu() {
     const navigate = useNavigate();
 
     console.log("este es token en menu con auth " + token);
+
+    const handleLogout = () => {
+        // Llama a la función de logout para limpiar el token
+        logout();
+        alert("Se ha cerrado la sesión ")
+    
+        // Además, podrías redirigir al usuario a la página de inicio o a donde desees
+         navigate("/"); // Asegúrate de importar 'navigate' desde 'react-router-dom'
+      };
 
 
 
@@ -67,8 +80,7 @@ function Menu() {
                                         <div id="dropdown" class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 group-hover:block">
                                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                                 <li>
-                                                    <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
-                                                    <Link to="login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administrador</Link>
+                                                <button onClick={handleLogout} class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
 
                                                 </li>
                                             </ul>
