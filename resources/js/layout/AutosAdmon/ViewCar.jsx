@@ -64,8 +64,9 @@ function ViewCar() {
 
             // console.log(response);
 
-            console.log("usuario" + userData.name)
-            console.log("id-usuario_fk", userData.id, "id_Auto_fk", id, "monto", price)
+            console.log("usuario" + userData.name);
+            console.log("id-usuario_fk", userData.id, "id_Auto_fk", id, "monto", price);
+            alert("Compra hecha");
 
             navigate("/home");//desde el nombre
 

@@ -56,13 +56,12 @@ function indexSell() {
         console.log("VentasData antes del filtro:", ventasData);
 
         const userId = userData.id;
-         
+
         const filteredCars = ventasData.filter(venta => venta.id_usuario_fk === userId);
-      //  console.log("Comparando: ", venta.id_usuario_fk, userId);
         setFilteredCars(filteredCars);
     }, [ventasData, userData]);
-    
-    
+
+
 
     console.log("datos filtrados", filteredCars);
 
@@ -99,13 +98,14 @@ function indexSell() {
                                     </thead>
                                     <tbody>
                                         {filteredCars.map((venta) => (
-                                            <tr key={venta.id}>
+                                            <tr key={`${venta.id}-${venta.id_usuario_fk}`}>
                                                 <td>{venta.id}</td>
                                                 <td>{venta.id_usuario_fk}</td>
                                                 <td>{venta.id_Auto_fk}</td>
                                                 <td>{venta.monto}</td>
                                             </tr>
                                         ))}
+
                                     </tbody>
 
                                 </table>
