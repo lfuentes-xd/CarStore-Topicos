@@ -12,15 +12,24 @@ class VentaController extends Controller
      */
     public function index()
     {
-        //
+        $Venta = Venta::all();
+        return $Venta;
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $Venta = Venta::create([
+            'id-usuario_fk'=>$request->idusuariofk, 
+            'id_Auto_fk'=>$request->idAutofk,
+            'monto'=>$request->monto
+        ]);
+        
+
     }
 
     /**
