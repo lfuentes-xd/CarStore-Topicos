@@ -8,39 +8,20 @@ import LinktoButton from "../../components/LinktoButton"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+// import { useState } from 'react';
 
-function ModifyCar() {
-    const [setToken] = useState(null);
+const ModifyCar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const car = location.state;
-
     const [formValue, setFormValue] = useState({
-        Modelo: '',
-        año: '',
-        Color: '',
-        Carroceria: ''
+        Modelo: car.Modelo,
+        año: car.año,
+        Color: car.Color,
+        Carroceria: car.Carroceria,
+        km: car.Km,
+        Costo: car.price
     });
-
-    useEffect(() => {
-        console.log('modelo:    ', formValue.Modelo)
-        if (car) {
-            setFormValue({
-                Modelo: car.Modelo || '1',
-                año: car.año || '',
-                Color: car.Color || '',
-                Carroceria: car.Carroceria || '',
-                // Agrega aquí el resto de las propiedades del auto...
-            });
-        }
-    }, [car])
-
-    const onChange = (e) => {
-        e.persist();
-        const name = e.target.name;
-        const value = e.target.type === 'select-one' ? e.target.options[e.target.selectedIndex].value : e.target.value;
-        setFormValue({ ...formValue, [name]: value });
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,49 +31,50 @@ function ModifyCar() {
         formData.append("año", formValue.año);
         formData.append("Color", formValue.Color);
         formData.append("Carroceria", formValue.Carroceria);
+        formData.append("km", formValue.km);
+        formData.append("Costo", formValue.Costo);
+
 
         try {
-          const response = await axios.put(
-            `http://localhost/CarStore-Topicos/public/api/Updatecar/${12}`,
-            formData,  // Pasa el formData como segundo parámetro
+            const response = await fetch(`http://localhost/CarStore-Topicos/public/api/Updatecar/${car.id}`,
             {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Accept: "application/json",
-              },
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formValue),
+            });
+
+            if (response.ok) {
+                console.log('Auto actualizado exitosamente');
+                navigate('/Carsadmon');
+            } else {
+                console.log("Error durante la actualización: ", response.data.message);
             }
-          );
-
-          console.log(response);
-
-          if (response.status === 200) {
-            console.log("Actualización exitosa!");
-            navigate("/CarsAdmon");
-          } else {
-            console.log("Error durante la actualización: ", response.data.message);
-          }
         } catch (error) {
-          console.error("Error durante la actualización: ", error);
+            console.error("Error durante la actualización: ", error);
         }
-      };
 
+    };
+
+    const onChange = (e) => {
+        setFormValue({ ...formValue, [e.target.name]: e.target.value });
+    };
 
     return (
         <>
             <div className="Container my-12">
-                <h1 className="text-xl text-center">Agregar auto</h1>
-                <div className="flex justify-center items-center">
-
-                    <form onSubmit={handleSubmit} style={{ width: '50%', maxWidth: '500px' }}>
-
+                <h1 className="text-3xl text-center">Modificar vehículo</h1>
+                <div className="w-full max-w-lg mx-auto">
+                    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Modelo" value="Modelo del auto" />
-                            <input value={formValue.Modelo} onChange={onChange} id="Modelo" name="Modelo" type="text"  className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Modelo" value="Modelo del vehiculo" />
+                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="año" value="Año del vehiculo" />
-                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
@@ -102,23 +84,31 @@ function ModifyCar() {
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Carroceria" value="Carroceria" />
-                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="km" value="km" />
+                            <TextInput value={formValue.km} onChange={onChange} id="km" type="number" name="km" className="mt-1 block w-full p-2 border border-black" required />
+                        </div>
+
+
+                        <div className="mt-4 mb-4" >
+                            <InputLabel htmlFor="Costo" value="Costo" />
+                            <TextInput value={formValue.Costo} onChange={onChange} id="Costo" type="text" name="Costo" className="mt-1 block w-full p-2 border border-black" required />
+                        </div>
 
                         <div className="">
                             <PrimaryButton className="w-full">Modificar</PrimaryButton>
 
-                            <LinktoButton to="/CarsAdmon" className="my-3 w-full bg-red-700 text-black">
-                                Regresar
-                                <img src={BackIcon} alt="" className="ml-2 w-4 h-4" />
-                            </LinktoButton>
+                            <LinktoButton to="/CarsAdmon" className="my-3 w-full">Volver</LinktoButton>
                         </div>
                     </form>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default ModifyCar
+export default ModifyCar;

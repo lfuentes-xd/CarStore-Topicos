@@ -31,8 +31,8 @@ function CarsAdmon() {
         }
     };
 
-    const handleModifyClick = (car) =>{
-        navigate('/ModifyCar', {state:car})
+    const handleModifyClick = (car) => {
+        navigate('/ModifyCar', { state: car })
     };
 
     return (
@@ -59,6 +59,13 @@ function CarsAdmon() {
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 ">
                                                 A Ñ O
                                             </th>
+
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 ">
+                                                K M
+                                            </th>
+
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 ">
+                                                COSTO                                            </th>
                                             <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4">
                                                 A C C I O N E S
                                             </th>
@@ -70,6 +77,10 @@ function CarsAdmon() {
                                                 <td className="text-sm font-light px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Modelo}</td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.año}</td>
+                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Km}</td>
+
+                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.price}</td>
+
                                                 <td>
                                                     <PrimaryButton onClick={() => handleModifyClick(car)} className="bg-gray-600 text-black">
                                                         modificar vehiculo

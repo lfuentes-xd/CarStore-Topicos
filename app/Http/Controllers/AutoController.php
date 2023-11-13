@@ -56,7 +56,8 @@ class AutoController extends Controller
     //         'Image' =>  $imageName
     //     ]);
     // }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'Id_marca_fk' => 'required',
             'Modelo' => 'required',
@@ -66,11 +67,11 @@ class AutoController extends Controller
             't_combustible' => 'required',
             'Existencias' => 'required',
             'Image' => 'required|mimes:jpeg,png,jpg',
-            'Km'=>'required',
-            'version'=>'required',
-            'TM'=>'required',
-            'liters'=>'required',
-            'price'=> 'required', // Añade validación de tipo de archivo si es necesario
+            'Km' => 'required',
+            'version' => 'required',
+            'TM' => 'required',
+            'liters' => 'required',
+            'price' => 'required', // Añade validación de tipo de archivo si es necesario
         ]);
 
         if ($request->hasFile('Image')) {
@@ -86,12 +87,12 @@ class AutoController extends Controller
                 't_combustible' => $request->t_combustible,
                 'Existencias' => $request->Existencias,
                 'Image' => $imagePath,
-                'Km'=>$request->Km,
-                'version'=>$request->version,
-                'TM'=>$request->TM,
-                 'liters'=>$request->liters,
-                 'price'=>$request->price,
-                 // Guarda la ruta personalizada en lugar del nombre generado automáticamente
+                'Km' => $request->Km,
+                'version' => $request->version,
+                'TM' => $request->TM,
+                'liters' => $request->liters,
+                'price' => $request->price,
+                // Guarda la ruta personalizada en lugar del nombre generado automáticamente
             ]);
 
             // Resto del código de almacenamiento
@@ -121,31 +122,26 @@ class AutoController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */public function update(Request $request, String $id)
-{
-    // Validar la solicitud
-    // $request->validate([
-    //     'Modelo' => 'required',
-    //     'año' => 'required',
-    //     'Color' => 'required',
-    //     'Carroceria' => 'required',
-    // ]);
+     */
+    public function update(Request $request, String $id)
+    {
+        $car = Auto::find($id);
 
-    $car = Auto::find($id);
+        if (!$car) {
+            return response()->json(['error' => 'Auto no encontrado'], 404);
+        }
 
-    if (!$car) {
-        return response()->json(['error' => 'Auto no encontrado'], 404);
+        $car->update([
+            'Modelo' => $request->Modelo,
+            'año' => $request->año,
+            'Color' => $request->Color,
+            'Carroceria' => $request->Carroceria,
+            'Km' => $request->km,
+            'price'=> $request->Costo
+        ]);
+
+        return response()->json(['message' => 'Auto actualizado exitosamente', 'data' => $car]);
     }
-
-    $car->update([
-        'Modelo' => $request->Modelo,
-        'año' => $request->año,
-        'Color' => $request->Color,
-        'Carroceria' => $request->Carroceria,
-    ]);
-
-    return response()->json(['message' => 'Auto actualizado exitosamente', 'data' => $car]);
-}
 
 
     /**
@@ -156,7 +152,8 @@ class AutoController extends Controller
         Auto::destroy($id);
     }
 
-    public function token(){
+    public function token()
+    {
         return csrf_token();
     }
 }
