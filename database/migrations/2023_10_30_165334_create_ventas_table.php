@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('monto');
             $table->timestamps();
 
-            $table->foreign('id-usuario_fk')->references('id')->on('users');
+            $table->foreign('id_usuario_fk')->references('id')->on('users');
             $table->foreign('id_Auto_fk')->references('id')->on('autos');
         });
     }
