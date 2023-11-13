@@ -20,7 +20,7 @@ function ViewCar() {
     const { id, model, year, color, type, fuel, disponibility, image, setShowCarInfo, Km, version, TM, liters, price } = location.state;
     const { auth } = useContext(AuthContext);//token
     const token = auth.token;//token
-    console.log("id en viw nuevo"+id);
+    console.log("id en viw nuevo" + id);
 
     console.log("token en ventas " + token);
     const [userData, setUserData] = useState({});
@@ -44,37 +44,41 @@ function ViewCar() {
 
     console.log("usuario", userData && userData.name);
     const ButtonBuy = async e => {
-        if (e && e.preventDefault()) e.preventDefault();
-        const formData = new FormData();
-        formData.append("idusuariofk", userData.id);
-        formData.append("idAutofk", id);
-        formData.append("monto", price);
+        if (token) {
+            if (e && e.preventDefault()) e.preventDefault();
+            const formData = new FormData();
+            formData.append("idusuariofk", userData.id);
+            formData.append("idAutofk", id);
+            formData.append("monto", price);
 
 
 
-        console.log("usuario form " + userData.name)
-        console.log("id-usuario_fk form ", userData.id, "id_Auto_fk", id, "monto", price)
-        console.log("id: "+id);
+            console.log("usuario form " + userData.name)
+            console.log("id-usuario_fk form ", userData.id, "id_Auto_fk", id, "monto", price)
+            console.log("id: " + id);
 
 
-        const response = await axios.post("http://localhost/CarStore-Topicos/public/api/createV",//aqui pon el link que tu tienes
-            formData
-        ).then(response => {
-            console.log("Compra hecha", response);
+            const response = await axios.post("http://localhost/CarStore-Topicos/public/api/createV",//aqui pon el link que tu tienes
+                formData
+            ).then(response => {
+                console.log("Compra hecha", response);
 
-            // console.log(response);
+                // console.log(response);
 
-            console.log("usuario" + userData.name);
-            console.log("id-usuario_fk", userData.id, "id_Auto_fk", id, "monto", price);
-            alert("Compra hecha");
+                console.log("usuario" + userData.name);
+                console.log("id-usuario_fk", userData.id, "id_Auto_fk", id, "monto", price);
+                alert("Compra hecha");
 
-            navigate("/home");//desde el nombre
+                navigate("/home");//desde el nombre
 
-        }).catch(error => {
-            console.log("error en la compra", error);
-            alert("error en la compra  ");
+            }).catch(error => {
+                console.log("error en la compra", error);
+                alert("error en la compra  ");
 
-        });
+            });
+        }else{
+            navigate("/login");
+        }
 
     };
     return (

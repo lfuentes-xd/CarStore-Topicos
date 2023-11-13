@@ -24,7 +24,7 @@ class VentaController extends Controller
     {
         //
         $Venta = Venta::create([
-            'id-usuario_fk'=>$request->idusuariofk, 
+            'id_usuario_fk'=>$request->idusuariofk, 
             'id_Auto_fk'=>$request->idAutofk,
             'monto'=>$request->monto
         ]);

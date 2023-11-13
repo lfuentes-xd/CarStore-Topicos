@@ -55,10 +55,42 @@ function indexSell() {
         console.log("userData.id:", userData.id);
         console.log("VentasData antes del filtro:", ventasData);
 
-        const userId = userData.id;
+        const userId = Number(userData.id);
 
-        const filteredCars = ventasData.filter(venta => venta.id_usuario_fk === userId);
-        setFilteredCars(filteredCars);
+
+        if (userId == 1) {
+            console.log("entro a 1 " + userId);
+            const filteredCars = ventasData.filter(ventaData => {
+                console.log("Venta actual:", ventaData);
+                console.log("ID de usuario en la venta:", ventaData.id_usuario_fk);
+                console.log("ID de usuario actual:", userId);
+                return Number(ventaData.id_usuario_fk) === userId;
+            });
+            console.log("datos en" + filteredCars);
+            setFilteredCars(filteredCars);
+
+        } else if (userId == 2) {
+            console.log("entro a 2 " + userId)
+            const allCars = ventasData.filter(ventaData => {
+                console.log("Venta actual:", ventaData);
+                console.log("ID de usuario en la venta:", ventaData.id_usuario_fk);
+                console.log("ID de usuario actual:", userId);
+                // Puedes omitir la condición para que todos los elementos se incluyan
+                return true;
+            });
+
+            console.log("datos en" + filteredCars);
+            setFilteredCars(allCars);
+        }
+
+
+
+
+
+
+
+
+
     }, [ventasData, userData]);
 
 

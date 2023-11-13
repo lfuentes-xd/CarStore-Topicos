@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Venta extends Model
 {
     protected $fillable=[
-        'id-usuario_fk',
+        'id_usuario_fk',
         'id_Auto_fk',
         'monto'
 
