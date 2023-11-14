@@ -115,7 +115,7 @@ function Menu() {
                                         Pagina principal
                                     </Link><Link to="Cars" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Autos</Link>
                                     <Link to="CarsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administracion de autos</Link>
-                                    <Link to="MarcaC" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administracion de marcas</Link>
+                                    <Link to="BrandsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Administracion de marcas</Link>
                                     <Link to="SellsAdmon" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ventas</Link>
                                 </div>
                                 <div>
