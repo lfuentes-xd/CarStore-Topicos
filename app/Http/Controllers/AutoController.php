@@ -26,53 +26,24 @@ class AutoController extends Controller
         return $Brand;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request){
-    //     $request->validate([
-    //         'Id_marca_fk' => 'required',
-    //         'Modelo' => 'required',
-    //         'año' => 'required',
-    //         'Color' => 'required',
-    //         'Carroceria' => 'required',
-    //         't_combustible' => 'required',
-    //         'Existencias' => 'required',
-    //         // 'Image' => 'required|mimes:jpeg,png,jpg',
-    //     ]);
-
-    //     $imageName = time() . '.' . $request->Image->extension();
-    //     $request->Image->move(public_path('images'), $imageName);
-
-    //     $auto = Auto::create([
-    //         'Id_marca_fk' => $request->Id_marca_fk,
-    //         'Modelo' => $request->Modelo,
-    //         'año' => $request->año,
-    //         'Color' => $request->Color,
-    //         'Carroceria' => $request->Carroceria,
-    //         't_combustible' => $request->t_combustible,
-    //         'Existencias' => $request->Existencias,
-    //         // 'Image'=> 'prueba',
-    //         'Image' =>  $imageName
-    //     ]);
-    // }
     public function store(Request $request)
     {
         $request->validate([
-            'Id_marca_fk' => 'required',
-            'Modelo' => 'required',
-            'año' => 'required',
-            'Color' => 'required',
-            'Carroceria' => 'required',
-            't_combustible' => 'required',
-            'Existencias' => 'required',
-            'Image' => 'required|mimes:jpeg,png,jpg',
-            'Km' => 'required',
-            'version' => 'required',
-            'TM' => 'required',
-            'liters' => 'required',
-            'price' => 'required', // Añade validación de tipo de archivo si es necesario
-        ]);
+        'Id_marca_fk' => 'required',
+        'Modelo' => 'required',
+        'año' => 'required|numeric|min:0',
+        'Color' => 'required|min:4|max:25',
+        'Carroceria' => 'required|min:4|max:25',
+        't_combustible' => 'required',
+        'Existencias' => 'required|min:0',
+        'Image' => 'required|mimes:jpeg,png,jpg',
+        'Km' => 'required|numeric|min:0',
+        'version' => 'required',
+        'TM' => 'required',
+        'liters' => 'required',
+        'price' => 'required|min:0', // Añade validación de tipo de archivo si es necesario
+    ]);
+
 
         if ($request->hasFile('Image')) {
             // $customFileName = 'mi_archivo_personalizado.' . $request->file('Image')->getClientOriginalExtension();

@@ -31,7 +31,7 @@ class MarcaController extends Controller
     {
         $request->validate(
             [
-                'Descripción'=>'required'
+                'Descripción'=>'required|unique:marcas,Descripción|max:20|min:5'
             ]
             );
 

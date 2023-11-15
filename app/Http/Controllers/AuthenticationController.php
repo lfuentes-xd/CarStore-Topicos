@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
@@ -12,10 +12,10 @@ class AuthenticationController extends Controller
     public function register (Request $request){
         $request->validate([
             'name'=>'required|max:255',
-            'email'=>'required|unique:users|max:255',
+            'email'=>'required|unique:users|max:255|email',
             'password'=>'required|min:8',
             'password_confirmation'=>'same:password|required'
-            
+
 
         ]);
         $user=User::create([
@@ -42,10 +42,10 @@ class AuthenticationController extends Controller
         if(!$user|| !Hash::check($request->password, $user->password)){
             return response([
                 'message'=>'The provided credential are incorrect'
-                
+
             ], 401);
         }
-        $token=$user->createToken('auth_token')->accessToken;   
+        $token=$user->createToken('auth_token')->accessToken;
 
         return response([
             'token'=> $token
