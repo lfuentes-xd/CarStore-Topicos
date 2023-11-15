@@ -9,8 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Marca extends Model
 {
     use HasFactory;
+
+    protected $table = "brands";
     protected $fillable = [
-        'Descripción'
+        'Desc'
     ];
     public function Auto(): HasMany
     {

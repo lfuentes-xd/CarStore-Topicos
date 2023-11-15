@@ -94,7 +94,7 @@ function CreateCars() {
                                 <option value="0">Selecciona una marca</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.id}>
-                                        {brand.Descripción}
+                                        {brand.Desc}
                                     </option>
                                 ))}
                             </select>

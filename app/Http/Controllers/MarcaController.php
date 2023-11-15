@@ -31,12 +31,12 @@ class MarcaController extends Controller
     {
         $request->validate(
             [
-                'Descripción'=>'required|unique:marcas,Descripción|max:20|min:5'
+                'Desc'=>'required|unique:Brands,Desc|max:20'
             ]
             );
 
         $marca = Marca::create([
-            'Descripción'=> $request->Descripción
+            'Desc'=> $request->Desc
         ]);
     }
 

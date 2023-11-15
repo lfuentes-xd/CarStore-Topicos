@@ -8,8 +8,16 @@ import LinktoButton from "../../components/LinktoButton"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+// import { AuthContext } from './AuthProvider';//token
+import { AuthContext } from "../../components/AuthProvider"
 
 function CreateBrands() {
+
+    // const [navigate, setNavigate] = useState(false);
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
     const [formValue, setFormValue] = useState({})
     const navigate = useNavigate();
 
@@ -22,7 +30,7 @@ function CreateBrands() {
         if (e && e.preventDefault()) e.preventDefault();
 
         const formData = new FormData();
-        formData.append("Descripción", formValue.Descripción);
+        formData.append("Desc", formValue.Desc);
 
 
         const response = await axios.post(
@@ -31,7 +39,8 @@ function CreateBrands() {
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`
                 }
 
             }
@@ -58,8 +67,8 @@ function CreateBrands() {
 
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Descripción" value="Marca del auto" />
-                            <TextInput value={formValue.Descripción} onChange={onChange} id="Descripción" type="text" name="Descripción" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Desc" value="Marca del auto" />
+                            <input value={formValue.Desc} onChange={onChange} id="Desc" type="text" name="Desc" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="">
