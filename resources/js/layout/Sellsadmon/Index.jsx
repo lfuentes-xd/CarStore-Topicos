@@ -11,8 +11,9 @@ import { AuthContext } from "../../components/AuthProvider"
 
 function indexSell() {
     const { auth } = useContext(AuthContext);
-    const [ventasData, setVentasData] = useState([]);
     const token = auth.token;
+    const [ventasData, setVentasData] = useState([]);
+    
     const [userData, setUserData] = useState({});//para el token
     const [filteredCars, setFilteredCars] = useState([]);
 
@@ -29,7 +30,12 @@ function indexSell() {
                     console.log("Datos de usuario:", userResponse.data);
                 }
 
-                const carResponse = await axios.get('http://localhost/CarStore-Topicos/public/api/ventas_index');
+                const carResponse = await axios.get('http://localhost/CarStore-Topicos/public/api/ventas_index',{
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+                );
                 setVentasData(carResponse.data);
                 console.log("Datos de ventas:", carResponse.data, "ventadata:", ventasData.data);
 

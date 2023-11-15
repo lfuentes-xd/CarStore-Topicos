@@ -8,6 +8,8 @@ import LinktoButton from "../../components/LinktoButton"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider"
 
 function CreateCars() {
     const [brands, setBrands] = useState([
@@ -15,10 +17,17 @@ function CreateCars() {
     const [setToken] = useState(null);
     const [formValue, setFormValue] = useState({})
     const navigate = useNavigate();
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
 
     //para poner los datos en las marcas
     useEffect(() => {
-        axios.get('http://localhost/CarStore-Topicos/public/api/Car_brands')
+        axios.get('http://localhost/CarStore-Topicos/public/api/Car_brands',{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 setBrands(response.data);
             })
@@ -61,7 +70,8 @@ function CreateCars() {
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    'Authorization': `Bearer ${token}`
                     // "X-CSRF-TOKEN": "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk"
                 }
 

@@ -2,14 +2,24 @@ import Plusicon from "../../../Images/Icons/add.png"
 import LinktoButton from "../../components/LinktoButton"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider";
 
 function BrandsAdmon() {
     const [cars, setCars] = useState([]);
+    const { auth } = useContext(AuthContext);//token
 
+    const token = auth.token;//token
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Brands_index');
+            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Brands_index', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            
             setCars(result.data);
+            
         };
         fetchData();
     }, []);

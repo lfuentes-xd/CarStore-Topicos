@@ -8,10 +8,16 @@ import LinktoButton from "../../components/LinktoButton"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+
+import { AuthContext } from "../../components/AuthProvider"
 
 function CreateBrands() {
     const [formValue, setFormValue] = useState({})
     const navigate = useNavigate();
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
 
     const onChange = (e) => {
         e.persist();
@@ -31,7 +37,8 @@ function CreateBrands() {
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    'Authorization': `Bearer ${token}`
                 }
 
             }
