@@ -6,14 +6,23 @@ import LinktoButton from "../../components/LinktoButton"
 import { useNavigate } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider"
 
 function CarsAdmon() {
     const [cars, setCars] = useState([]);
     const navigate = useNavigate();
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index');
+            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index',{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             setCars(result.data);
         };
         fetchData();
@@ -21,7 +30,11 @@ function CarsAdmon() {
 
     const deleteCar = async (id) => {
         try {
-            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`);
+            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             if (response.status === 200) {
                 // Actualizar la lista de autos después de eliminar
                 setCars(cars.filter(car => car.id !== id));

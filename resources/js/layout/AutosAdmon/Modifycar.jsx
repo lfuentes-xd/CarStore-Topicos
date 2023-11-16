@@ -9,11 +9,16 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 // import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider"
 
 const ModifyCar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const car = location.state;
+    const { auth } = useContext(AuthContext);//token
+
+    const token = auth.token;//token
     const [formValue, setFormValue] = useState({
         Modelo: car.Modelo,
         año: car.año,
@@ -41,6 +46,9 @@ const ModifyCar = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+
+
                 },
                 body: JSON.stringify(formValue),
             });

@@ -5,13 +5,8 @@ import { useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../components/AuthProvider';//token
 import { Outlet, Link } from 'react-router-dom';
-
-
-
-
 import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
-
 
 
 function ViewCar() {
@@ -51,13 +46,6 @@ function ViewCar() {
             formData.append("idAutofk", id);
             formData.append("monto", price);
 
-
-
-            console.log("usuario form " + userData.name)
-            console.log("id-usuario_fk form ", userData.id, "id_Auto_fk", id, "monto", price)
-            console.log("id: " + id);
-
-
             const response = await axios.post("http://localhost/CarStore-Topicos/public/api/createV",//aqui pon el link que tu tienes
                 formData
             ).then(response => {
@@ -76,40 +64,82 @@ function ViewCar() {
                 alert("error en la compra  ");
 
             });
-        }else{
+        } else {
             navigate("/login");
         }
 
     };
     return (
-        <>
-            <div className="Container flex m-10">
-                <div className="w-1/2">
-                    <h1>
-                        <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + image} alt="" />
-                    </h1>
+        <div className=''>
+            <div className="Container flex mt-5">
+                <div className="w-3/4">
+                    <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + image} alt="" />
                 </div>
-                <div className="w-1/2 font-small">
-                    <h1 className="text-3xl ml-3">Modelo del auto: {model}</h1>
-                    <h1 className="text-3xl ml-3">Año del auto: {year}</h1>
-                    <h1 className="text-3xl ml-3">Carroceria del auto: {type}</h1>
-                    <h1 className="text-3xl ml-3">Color del auto: {color}</h1>
-                    <h1 className="text-3xl ml-3">Tipo de combustible del auto: {fuel}</h1>
-                    <h1 className="text-3xl ml-3">Cantidad de kilometros: {fuel}</h1>
-                    <h1 className="text-3xl ml-3">Tipo de combustible del auto: {Km}</h1>
-                    <h1 className="text-3xl ml-3">Versión del automovil: {version}</h1>
-                    <h1 className="text-3xl ml-3">Tipo de transmisión: {TM}</h1>
-                    <h1 className="text-3xl ml-3">Almacenamiento en litros de gasolina: {liters} <br /></h1>
-                    <h1 className="text-3xl ml-3">Precio: {price}</h1>
+                <div className="w-1/4 pl-3">
+                    <div className='border border-gray-300 mx-10 h-auto w-full'>
+                        <h1 className='m-3 font-bold text-xl'>{model}</h1>
+                        <p className='m-3'>{Km} kilometros</p>
+                    </div>
 
+                    <div className='border border-gray-300 mx-10 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>$ {price}</h1>
+                        <p className='m-3'>desde $3250 /Mes</p>
+                    </div>
 
+                    <div className='border border-gray-300 mx-10 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Año:</h1>
+                        <p className='m-3'>{year}</p>
+                    </div>
 
-                    <PrimaryButton onClick={ButtonBuy} className='w-full mt-5 ml-5'>Comprar automovil</PrimaryButton>
-                    <PrimaryButton onClick={handleButtonClick} className='w-full mt-5 bg-red-500 hover:bg-red-600 ml-5'>Regresar</PrimaryButton>
+                    <div className='border border-gray-300 mx-10 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Version</h1>
+                        <p className='m-3'>{version}</p>
+                    </div>
+
+                    <div className='border border-gray-300 mx-10 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Transmisión</h1>
+                        <p className='m-3'>{TM}</p>
+                    </div>
+
+                    <div className='border border-gray-300 mx-10 h-auto w-full'>
+                        <PrimaryButton onClick={ButtonBuy} className='w-full mt-5'>Comprar automovil</PrimaryButton>
+                        <PrimaryButton onClick={handleButtonClick} className='w-full mt-5 bg-red-500 hover:bg-red-600'>Regresar</PrimaryButton>
+                    </div>
                 </div>
             </div>
-        </>
+            <div className='container flex'>
+                {/* <h1 className='my-5 font-bold text-xl'>Información Basica</h1> */}
+                <div className='w-1/4'>
+                    <div className='border border-gray-300 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Transmisión</h1>
+                        <p className='m-3'>{TM}</p>
+                    </div>
+
+                    <div className='border border-gray-300  h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Color del auto</h1>
+                        <p className='m-3'>{color}</p>
+                    </div>
+
+                    <div className='border border-gray-300 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Tipo de combustible</h1>
+                        <p className='m-3'>{fuel}</p>
+                    </div>
+                </div>
+                <div className='w-1/4 ml-5'>
+                    <div className='border border-gray-300  h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Carroceria del auto</h1>
+                        <p className='m-3'>{type}</p>
+                    </div>
+
+                    <div className='border border-gray-300 h-auto w-full mt-5'>
+                        <h1 className='m-3 font-bold text-xl'>Capacidad del motor</h1>
+                        <p className='m-3'>{liters}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
+
 }
 
 export default ViewCar

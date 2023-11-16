@@ -8,6 +8,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider";
 
 
 function ConsumerInf() {
@@ -22,8 +24,9 @@ function ConsumerInf() {
     
     const navigate = useNavigate();
     const location = useLocation();//los importantes par  token
-    const token = location.state && location.state.token;//los importantes para token
-    const [userData, setUserData] = useState({});//para el token
+     const [userData, setUserData] = useState({});//para el token
+    const { auth } = useContext(AuthContext);
+    const token = auth.token;
 
     console.log("este es p " + token);
 

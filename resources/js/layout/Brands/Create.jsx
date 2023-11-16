@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 // import { AuthContext } from './AuthProvider';//token
+
 import { AuthContext } from "../../components/AuthProvider"
 
 function CreateBrands() {
@@ -40,7 +41,7 @@ function CreateBrands() {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Accept: "application/json",
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`
                 }
 
             }

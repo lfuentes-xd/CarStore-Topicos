@@ -2,14 +2,24 @@ import Plusicon from "../../../Images/Icons/add.png"
 import LinktoButton from "../../components/LinktoButton"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { useContext } from 'react';
+import { AuthContext } from "../../components/AuthProvider";
 
 function BrandsAdmon() {
     const [cars, setCars] = useState([]);
+    const { auth } = useContext(AuthContext);//token
 
+    const token = auth.token;//token
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Brands_index');
+            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Brands_index', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
             setCars(result.data);
+
         };
         fetchData();
     }, []);
@@ -41,7 +51,7 @@ function BrandsAdmon() {
                                         {cars.map((car) => (
                                             <tr key={car.id} className="bg-gray-100 border-b text-center">
                                                 <td className="text-sm font-light px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Descripción}</td>
+                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Desc}</td>
                                             </tr>
                                         ))}
                                     </tbody>

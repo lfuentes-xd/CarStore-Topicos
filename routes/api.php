@@ -25,11 +25,12 @@ Route::middleware('auth:api')->get('/user_index', [AuthenticationController::cla
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/Car_index', [AutoController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
     Route::post('/products', [ProductController::class, 'store']);
-    Route::get('/Car_index', [AutoController::class, 'index']);
+   
 
     Route::get('/Car_brands', [AutoController::class, 'create']);
 
