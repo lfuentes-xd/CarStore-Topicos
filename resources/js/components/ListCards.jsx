@@ -27,35 +27,35 @@ function ListCards() {
         getCars()
     }, []);
 
-    console.log("ver id" +carData.id);
+    console.log("ver id" + carData.id);
     if (!carData.length) return
     <span className="visually-hidden">Loading...</span>
 
     return (
         <>
             {carData.map((car) => {
-                console.log('ID:', car.id); 
-                return(
-                
-                <Cards
-                    id={car.id}
-                    model={car.Modelo}
-                    year={car.año}
-                    color={car.Color}
-                    type={car.Carroceria}
-                    fuel={car.t_combustible}
-                    disponibility={car.Existencias}
-                    image={car.Image}
-                    Km={car.Km}
-                    version={car.version}
-                    TM={car.TM}
-                    liters={car.liters}
-                    price={car.price}
+                console.log('ID:', car.id);
+                return (
 
-                />
+                    <Cards
+                        id={car.id}
+                        model={car.Model}
+                        year={car.year}
+                        color={car.Color}
+                        type={car.type}
+                        fuel={car.fuel}
+                        disponibility={car.Available}
+                        image={car.Image}
+                        Km={car.Km}
+                        version={car.version}
+                        TM={car.TM}
+                        liters={car.liters}
+                        price={car.price}
+
+                    />
                 )
 
-})}
+            })}
 
         </>
     );

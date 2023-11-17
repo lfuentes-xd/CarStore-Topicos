@@ -20,10 +20,10 @@ const ModifyCar = () => {
 
     const token = auth.token;//token
     const [formValue, setFormValue] = useState({
-        Modelo: car.Modelo,
-        año: car.año,
+        Model: car.Model,
+        year: car.year,
         Color: car.Color,
-        Carroceria: car.Carroceria,
+        type: car.type,
         km: car.Km,
         Costo: car.price
     });
@@ -32,26 +32,24 @@ const ModifyCar = () => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("Modelo", formValue.Modelo);
-        formData.append("año", formValue.año);
+        formData.append("Model", formValue.Model);
+        formData.append("year", formValue.year);
         formData.append("Color", formValue.Color);
-        formData.append("Carroceria", formValue.Carroceria);
+        formData.append("type", formValue.type);
         formData.append("km", formValue.km);
-        formData.append("Costo", formValue.Costo);
+        formData.append("price", formValue.price);
 
 
         try {
             const response = await fetch(`http://localhost/CarStore-Topicos/public/api/Updatecar/${car.id}`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-
-
-                },
-                body: JSON.stringify(formValue),
-            });
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formValue),
+                });
 
             if (response.ok) {
                 console.log('Auto actualizado exitosamente');
@@ -76,13 +74,13 @@ const ModifyCar = () => {
                 <div className="w-full max-w-lg mx-auto">
                     <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Modelo" value="Modelo del vehiculo" />
-                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Model" value="Modelo del vehiculo" />
+                            <TextInput value={formValue.Model} onChange={onChange} id="Model" type="text" name="Model" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="año" value="Año del vehiculo" />
-                            <TextInput value={formValue.año} onChange={onChange} id="año" type="text" name="año" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="year" value="Año del vehiculo" />
+                            <TextInput value={formValue.year} onChange={onChange} id="year" type="number" name="year" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
@@ -91,8 +89,8 @@ const ModifyCar = () => {
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Carroceria" value="Carroceria" />
-                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="type" value="Carroceria" />
+                            <TextInput value={formValue.type} onChange={onChange} id="type" type="text" name="type" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
 

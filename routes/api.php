@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AutoController;
+use App\Http\Controllers\CarsController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CompradorController;
 use App\Http\Controllers\VentaController;
@@ -25,26 +25,26 @@ Route::middleware('auth:api')->get('/user_index', [AuthenticationController::cla
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/Car_index', [AutoController::class, 'index']);
+Route::get('/Car_index', [CarsController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
     Route::post('/products', [ProductController::class, 'store']);
-   
 
-    Route::get('/Car_brands', [AutoController::class, 'create']);
+
+    Route::get('/Car_brands', [CarsController::class, 'create']);
 
     Route::get('/ventas_index', [VentaController::class, 'index']);
 
-    Route::post('/insert', [AutoController::class, 'store']);
-    Route::get('/Car_token', [AutoController::class, 'token']);
-    Route::post('/car/{id}/delete', [AutoController::class, 'destroy']);
-    Route::post('/Updatecar/{id}', [AutoController::class, 'update']);
+    Route::post('/insert', [CarsController::class, 'store']);
+    Route::get('/Car_token', [CarsController::class, 'token']);
+    Route::post('/car/{id}/delete', [CarsController::class, 'destroy']);
+    Route::post('/Updatecar/{id}', [CarsController::class, 'update']);
 
 
-    Route::get('/Brands_index', [Marcacontroller::class, 'index']);
-    Route::post('/insertBrand', [MarcaController::class, 'store']);
-    Route::post('/Brands/{id}/delete', [MarcaController::class, 'destroy']);
+    Route::get('/Brands_index', [BrandsController::class, 'index']);
+    Route::post('/insertBrand', [BrandsController::class, 'store']);
+    Route::post('/Brands/{id}/delete', [BrandsController::class, 'destroy']);
     Route::post('/createV', [VentaController::class, 'create']);
     Route::post('/infoC', [CompradorController::class, 'create']);
 

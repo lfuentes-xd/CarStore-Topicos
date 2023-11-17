@@ -75,7 +75,7 @@ function ViewCar() {
                 <div className="w-3/4">
                     <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + image} alt="" />
                 </div>
-                <div className="w-1/4 pl-3">
+                <div className="w-1/4 pl-3 mr-2">
                     <div className='border border-gray-300 mx-10 h-auto w-full'>
                         <h1 className='m-3 font-bold text-xl'>{model}</h1>
                         <p className='m-3'>{Km} kilometros</p>

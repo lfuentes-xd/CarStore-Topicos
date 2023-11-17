@@ -20,7 +20,7 @@ function Cards(props) {
 
 
     const handleButtonClick = () => {
-        console.log("id en cards"+carId);
+        console.log("id en cards" + carId);
         navigate('/ViewCar', {
             state: {
                 model: model,
@@ -41,30 +41,27 @@ function Cards(props) {
     };
 
     return (
-        <div className="mt-5 shadow-md border border-gray-200 rounded-lg max-w-sm bg-white dark:border-gray-700 text-white mx-auto">
-            <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + Image} alt="" />
-            <div className="p-5">
-                <a href="#">
-                    <h5 className="text-black font-bold text-2xl tracking-tight">{model}</h5>
-                </a>
-                <p className="font-normal text-black mb-3 ">
-                    Año: {year}<br />
-                    Color: {color} <br />
-                    Tipo de carroceria: {type}<br />
-                    Tipo de combustible: {fuel}<br />
-                    Kilometros: {Km}<br/>
-                    Tipo de transmisión: {TM}<br/>
-                    Versión: {version}<br/>
-                    Litros: {liters}<br/>
-                    Precio: {price}<br/>
-                    {/* Disponible:{disponibility} */}
-                </p>
-                <button onClick={handleButtonClick} className="text-black font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex border-solid border-2">
-                    Mas informacion
-                    <img src={NextIcon} className="w-6 h-6" alt="" />
-                </button>
+        <>
+            <div className="mt-5 shadow-md border border-gray-200 rounded-lg max-w-sm bg-white dark:border-gray-700 text-white mx-auto">
+                <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + Image} alt="" />
+                <div className="p-5">
+                    <a href="#">
+                        <h5 className="text-black font-bold text-2xl tracking-tight">{model}</h5>
+                    </a>
+                    {/* <h2>precio</h2> */}
+
+                    <p className="font-normal text-black mb-3 ">
+                        {year} - {Km} km - {liters} lts - Precio: {price} $
+                    </p>
+                    {/* <h1 className='m-3 font-bold text-xl'>$ precio: </h1> */}
+                    {/* <p className='m-3'>desde $3250 /Mes</p> */}
+                    <button onClick={handleButtonClick} className="mt-5 text-black font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex border-solid border-2">
+                        Mas informacion
+                        <img src={NextIcon} className="w-6 h-6" alt="" />
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

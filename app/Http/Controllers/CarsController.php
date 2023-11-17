@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auto;
-use App\Models\Marca;
+use App\Models\Cars;
+use App\Models\brands;
 use Illuminate\Http\Request;
 
-class AutoController extends Controller
+class CarsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Auto = Auto::all();
+        $Auto = Cars::all();
         return $Auto;
     }
 
@@ -22,20 +22,20 @@ class AutoController extends Controller
      */
     public function create()
     {
-        $Brand = Marca::all();
+        $Brand = brands::all();
         return $Brand;
     }
 
     public function store(Request $request)
     {
         $request->validate([
-        'Id_marca_fk' => 'required',
-        'Modelo' => 'required',
-        'año' => 'required|numeric|min:0',
+        'Id_Brand_fk' => 'required',
+        'Model' => 'required',
+        'year' => 'required|numeric|min:0',
         'Color' => 'required|min:4|max:25',
-        'Carroceria' => 'required|min:4|max:25',
-        't_combustible' => 'required',
-        'Existencias' => 'required|min:0',
+        'type' => 'required|min:4|max:25',
+        'fuel' => 'required',
+        'Available' => 'required|min:0',
         'Image' => 'required|mimes:jpeg,png,jpg',
         'Km' => 'required|numeric|min:0',
         'version' => 'required',
@@ -49,14 +49,14 @@ class AutoController extends Controller
             // $customFileName = 'mi_archivo_personalizado.' . $request->file('Image')->getClientOriginalExtension();
             $imagePath = $request->file('Image')->store('Images', 'public');
 
-            $auto = Auto::create([
-                'Id_marca_fk' => $request->Id_marca_fk,
-                'Modelo' => $request->Modelo,
-                'año' => $request->año,
+            $auto = Cars::create([
+                'Id_Brand_fk' => $request->Id_Brand_fk,
+                'Model' => $request->Model,
+                'year' => $request->year,
                 'Color' => $request->Color,
-                'Carroceria' => $request->Carroceria,
-                't_combustible' => $request->t_combustible,
-                'Existencias' => $request->Existencias,
+                'type' => $request->type,
+                'fuel' => $request->fuel,
+                'Available' => $request->Available,
                 'Image' => $imagePath,
                 'Km' => $request->Km,
                 'version' => $request->version,
@@ -78,7 +78,7 @@ class AutoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Auto $auto)
+    public function show(Cars $auto)
     {
         //
     }
@@ -86,7 +86,7 @@ class AutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Auto $auto)
+    public function edit(Cars $auto)
     {
         //
     }
@@ -96,17 +96,17 @@ class AutoController extends Controller
      */
     public function update(Request $request, String $id)
     {
-        $car = Auto::find($id);
+        $car = Cars::find($id);
 
         if (!$car) {
             return response()->json(['error' => 'Auto no encontrado'], 404);
         }
 
         $car->update([
-            'Modelo' => $request->Modelo,
-            'año' => $request->año,
+            'Model' => $request->Model,
+            'year' => $request->year,
             'Color' => $request->Color,
-            'Carroceria' => $request->Carroceria,
+            'type' => $request->type,
             'Km' => $request->km,
             'price'=> $request->Costo
         ]);
@@ -120,7 +120,7 @@ class AutoController extends Controller
      */
     public function destroy(String $id)
     {
-        Auto::destroy($id);
+        Cars::destroy($id);
     }
 
     public function token()

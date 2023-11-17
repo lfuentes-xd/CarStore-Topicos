@@ -18,7 +18,7 @@ function CarsAdmon() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index',{
+            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -30,7 +30,7 @@ function CarsAdmon() {
 
     const deleteCar = async (id) => {
         try {
-            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`,{
+            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -78,7 +78,8 @@ function CarsAdmon() {
                                             </th>
 
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 ">
-                                                COSTO                                            </th>
+                                                COSTO
+                                            </th>
                                             <th scope="col" className="text-sm font-bold text-gray-900 px-6 py-4">
                                                 A C C I O N E S
                                             </th>
@@ -87,12 +88,12 @@ function CarsAdmon() {
                                     <tbody>
                                         {cars.map((car) => (
                                             <tr key={car.id} className="bg-gray-100 border-b text-center">
-                                                <td className="text-sm font-light px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Modelo}</td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.año}</td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Km}</td>
+                                                <td className="text-sm px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.Model}</td>
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.year}</td>
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.Km}</td>
 
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.price}</td>
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.price}</td>
 
                                                 <td>
                                                     <PrimaryButton onClick={() => handleModifyClick(car)} className="bg-gray-600 text-black">
@@ -100,7 +101,7 @@ function CarsAdmon() {
                                                         <img src={EditIcon} alt="" className="ml-2 w-4 h-4" />
                                                     </PrimaryButton>
                                                 </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                                     <PrimaryButton className="bg-gray-600 text-black" onClick={() => deleteCar(car.id)}>
                                                         Eliminar vehiculo
                                                         <img src={DeleteIcon} alt="" className="ml-2 w-4 h-4" />

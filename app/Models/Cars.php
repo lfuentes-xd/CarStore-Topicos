@@ -7,28 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Auto extends Model
+class Cars extends Model
 {
     use HasFactory;
+    protected $table = "Cars";
     // public static $timestamps = false;
 
     public function Venta(): HasMany
     {
         return $this->hasMany(Venta::class);
     }
-    public function Marca(): BelongsTo
+
+    public function Brands(): BelongsTo
     {
-        return $this->belongsTo(Marca::class);
+        return $this->belongsTo(brands::class, 'Id_Brand_fk', 'id');
     }
 
     protected $fillable = [
-        'Id_marca_fk',
-        'Modelo',
-        'año',
+        'Id_Brand_fk',
+        'Model',
+        'year',
         'Color',
-        'Carroceria',
-        't_combustible',
-        'Existencias',
+        'type',
+        'fuel',
+        'Available',
         'Image',
         'Km',
         'version',
@@ -37,5 +39,4 @@ class Auto extends Model
         'price'
         // Otros campos que quieres que Laravel pueda asignar masivamente
     ];
-
 }

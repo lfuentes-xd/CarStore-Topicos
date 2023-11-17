@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('autos', function (Blueprint $table) {
+        Schema::create('Cars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('Id_marca_fk');
-            $table->string('Modelo');
-            $table->integer('año');
+            $table->unsignedBigInteger('Id_Brand_fk');
+            $table->string('Model');
+            $table->integer('year');
             $table->string('Color');
-            $table->String('Carroceria');
-            $table->String('t_combustible');
-            $table->integer('Existencias');
+            $table->String('type');
+            $table->String('fuel');
+            $table->integer('Available');
             $table->timestamps();
             $table->String('Image',250);
             $table->string('Km', 250);
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('TM',250);
             $table->string('liters',250);
             $table->decimal('price', 10, 2);
-            $table->foreign('Id_marca_fk')->references('id')->on('Brands');
+            $table->foreign('Id_Brand_fk')->references('id')->on('Brands');
         });
     }
 
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('autos');
+        Schema::dropIfExists('Cars');
     }
 };

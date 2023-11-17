@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marca;
+use App\Models\brands;
 use Illuminate\Http\Request;
 
-class MarcaController extends Controller
+class BrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $marca = Marca::all();
+        $marca = brands::all();
         return $marca;
     }
 
@@ -35,7 +35,7 @@ class MarcaController extends Controller
             ]
             );
 
-        $marca = Marca::create([
+        $marca = brands::create([
             'Desc'=> $request->Desc
         ]);
     }
@@ -43,7 +43,7 @@ class MarcaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Marca $marca)
+    public function show(brands $marca)
     {
         //
     }
@@ -51,7 +51,7 @@ class MarcaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Marca $marca)
+    public function edit(brands $marca)
     {
         //
     }
@@ -59,7 +59,7 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request, brands $marca)
     {
         //
     }
@@ -69,6 +69,6 @@ class MarcaController extends Controller
      */
     public function destroy(String $id)
     {
-        Marca::destroy($id);
+        brands::destroy($id);
     }
 }

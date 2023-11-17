@@ -48,13 +48,13 @@ function CreateCars() {
         if (e && e.preventDefault()) e.preventDefault();
 
         const formData = new FormData();
-        formData.append("Id_marca_fk", formValue.Id_marca_fk);
-        formData.append("Modelo", formValue.Modelo);
-        formData.append("año", formValue.año);
+        formData.append("Id_Brand_fk", formValue.Id_Brand_fk);
+        formData.append("Model", formValue.Model);
+        formData.append("year", formValue.year);
         formData.append("Color", formValue.Color);
-        formData.append("Carroceria", formValue.Carroceria);
-        formData.append("t_combustible", formValue.t_combustible);
-        formData.append("Existencias", formValue.Existencias);
+        formData.append("type", formValue.type);
+        formData.append("fuel", formValue.fuel);
+        formData.append("Available", formValue.Available);
         // formData.append("Image", formValue.Image);
         formData.append("Image", e.target.elements.Image.files[0]); // Adjunta el archivo
         formData.append("Km", formValue.Km);
@@ -100,7 +100,7 @@ function CreateCars() {
                         <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Id_marca_fk" value="Marca del auto" />
 
-                            <select value={formValue.Id_marca_fk} onChange={onChange} id="Id_marca_fk" name="Id_marca_fk" className="mt-1 block w-full p-2 border border-black">
+                            <select value={formValue.Id_Brand_fk} onChange={onChange} id="Id_Brand_fk" name="Id_Brand_fk" className="mt-1 block w-full p-2 border border-black">
                                 <option value="0">Selecciona una marca</option>
                                 {brands.map(brand => (
                                     <option key={brand.id} value={brand.id}>
@@ -112,13 +112,13 @@ function CreateCars() {
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Modelo" value="Modelo del auto" />
-                            <TextInput value={formValue.Modelo} onChange={onChange} id="Modelo" type="text" name="Modelo" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Model" value="Modelo del auto" />
+                            <TextInput value={formValue.Model} onChange={onChange} id="Model" type="text" name="Model" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="año" value="Año del vehiculo" />
-                            <TextInput value={formValue.año} onChange={onChange} id="año" type="number" name="año" className="mt-1 block w-full p-2 border border-black"  required />
+                            <InputLabel htmlFor="year" value="Año del vehiculo" />
+                            <TextInput value={formValue.year} onChange={onChange} id="year" type="number" name="year" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
                         <div className="mt-4 mb-4" >
@@ -127,8 +127,8 @@ function CreateCars() {
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Carroceria" value="Carroceria" />
-                            <TextInput value={formValue.Carroceria} onChange={onChange} id="Carroceria" type="text" name="Carroceria" className="mt-1 block w-full p-2 border border-black"  required />
+                            <InputLabel htmlFor="type" value="Carroceria" />
+                            <TextInput value={formValue.type} onChange={onChange} id="type" type="text" name="type" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Km" value="Km" />
@@ -152,7 +152,7 @@ function CreateCars() {
                             <TextInput value={formValue.price} onChange={onChange} id="price" type="number" name="price" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
-                        <select value={formValue.t_combustible} onChange={onChange} id="t_combustible" name="t_combustible" className="mt-1 block w-full p-2 border border-black">
+                        <select value={formValue.fuel} onChange={onChange} id="fuel" name="fuel" className="mt-1 block w-full p-2 border border-black">
                             <option value="0">Selecciona un tipo de combustible</option>
                             <option value="gasolina">Gasolina</option>
                             <option value="diesel">Diesel</option>
@@ -162,9 +162,9 @@ function CreateCars() {
 
 
                         <div className="mt-4 mb-4">
-                            <InputLabel htmlFor="Existencias" value="¿Disponible?" />
+                            <InputLabel htmlFor="Available" value="¿Disponible?" />
 
-                        <select value={formValue.Existencias} onChange={onChange} id="Existencias" name="Existencias" className="mt-1 block w-full p-2 border border-black">
+                        <select value={formValue.Available} onChange={onChange} id="Available" name="Available" className="mt-1 block w-full p-2 border border-black">
                             <option value="0">Selecciona una opcion</option>
                             <option value="1">Disponible</option>
                             <option value="2">Sin disponibilidad</option>
