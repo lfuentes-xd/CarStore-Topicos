@@ -13,8 +13,8 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $Auto = Cars::all();
-        return $Auto;
+        $Car = Cars::all();
+        return $Car;
     }
 
     /**

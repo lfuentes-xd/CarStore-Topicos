@@ -42,12 +42,16 @@ function ViewCar() {
         if (token) {
             if (e && e.preventDefault()) e.preventDefault();
             const formData = new FormData();
-            formData.append("idusuariofk", userData.id);
-            formData.append("idAutofk", id);
-            formData.append("monto", price);
+            formData.append("Id_foreign_key", userData.id);
+            formData.append("Id_foreign_keycars", id);
+            formData.append("amount", price);
 
             const response = await axios.post("http://localhost/CarStore-Topicos/public/api/createV",//aqui pon el link que tu tienes
-                formData
+                formData,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
             ).then(response => {
                 console.log("Compra hecha", response);
 

@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Venta extends Model
+class Sale extends Model
 {
+    protected $table = "Sale";
     protected $fillable=[
-        'id_usuario_fk',
-        'id_Auto_fk',
-        'monto'
+        'Id_foreign_key',
+        'Id_foreign_keycars',
+        'amount'
 
     ];
     use HasFactory;
@@ -21,7 +22,7 @@ class Venta extends Model
     }
     public function Auto(): BelongsTo
     {
-        return $this->belongsTo(Auto::class);
+        return $this->belongsTo(Cars::class);
     }
 }
 

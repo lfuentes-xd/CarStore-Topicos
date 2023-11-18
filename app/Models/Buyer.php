@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Comprador extends Model
+class Buyer extends Model
 {
 
 /**
@@ -14,7 +14,7 @@ class Comprador extends Model
      *
      * @var string
      */
-    protected $table = 'compradores';
+    protected $table = 'Buyer';
 
     use HasFactory;
     public function User(): HasOne
@@ -22,12 +22,12 @@ class Comprador extends Model
         return $this->hasOne(User::class);
     }
     protected $fillable = [
-        'teléfono',
-            'calle',
-            'N_casa',
-            'Nombre',
-            'per_apellido',
-            'sdo_apellido',
-            'id_usuario',
+        'phone_number',
+            'street',
+            'House_number',
+            'name',
+            'Surname',//primer apellido
+            'second_surname',
+            'id_user',
     ];
 }
