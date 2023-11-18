@@ -14,8 +14,8 @@ class brands extends Model
     protected $fillable = [
         'Desc'
     ];
-    public function Auto(): HasMany
+    public function Cars(): HasMany
     {
-        return $this->hasMany(Auto::class, 'Id_Brand_fk', 'id');
+        return $this->hasMany(Cars::class, 'Id_Brand_fk', 'id');
     }
 }

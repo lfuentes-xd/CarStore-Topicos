@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Venta;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
-class VentaController extends Controller
+class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Venta = Venta::all();
-        return $Venta;
+        $Sale = Sale::all();
+        return $Sale;
     }
 
 
@@ -23,10 +23,10 @@ class VentaController extends Controller
     public function create(Request $request)
     {
         //
-        $Venta = Venta::create([
-            'id_usuario_fk'=>$request->idusuariofk, 
-            'id_Auto_fk'=>$request->idAutofk,
-            'monto'=>$request->monto
+        $Sale = Sale::create([
+            'Id_foreign_key'=>$request->Id_foreign_key, 
+            'Id_foreign_keycars'=>$request->Id_foreign_keycars,
+            'amount'=>$request->amount
         ]);
         
 
@@ -43,7 +43,7 @@ class VentaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Venta $venta)
+    public function show(Sale $sale)
     {
         //
     }
@@ -51,7 +51,7 @@ class VentaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Venta $venta)
+    public function edit(Sale $sale)
     {
         //
     }
@@ -67,7 +67,7 @@ class VentaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Venta $venta)
+    public function destroy(Sale $sale)
     {
         //
     }

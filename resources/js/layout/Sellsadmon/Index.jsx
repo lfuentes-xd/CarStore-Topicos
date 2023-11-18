@@ -12,8 +12,8 @@ import { AuthContext } from "../../components/AuthProvider"
 function indexSell() {
     const { auth } = useContext(AuthContext);
     const token = auth.token;
-    const [ventasData, setVentasData] = useState([]);
-    
+    const [SellData, setSellData] = useState([]);
+
     const [userData, setUserData] = useState({});//para el token
     const [filteredCars, setFilteredCars] = useState([]);
 
@@ -27,21 +27,21 @@ function indexSell() {
                         }
                     });
                     setUserData(userResponse.data);
-                    console.log("Datos de usuario:", userResponse.data);
+                    // console.log("Datos de usuario:", userResponse.data);
                 }
 
-                const carResponse = await axios.get('http://localhost/CarStore-Topicos/public/api/ventas_index',{
+                const carResponse = await axios.get('http://localhost/CarStore-Topicos/public/api/ventas_index', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 }
                 );
-                setVentasData(carResponse.data);
-                console.log("Datos de ventas:", carResponse.data, "ventadata:", ventasData.data);
+                setSellData(carResponse.data);
+                // console.log("Datos de ventas:", carResponse.data, "ventadata:", ventasData.data);
 
 
                 // Verificar si ventasData se ha actualizado correctamente
-                console.log("VentasData actualizado:", ventasData);
+                //  console.log("VentasData actualizado:", ventasData);
 
             } catch (error) {
                 console.log("Error: ", error);
@@ -51,61 +51,49 @@ function indexSell() {
         fetchData();
     }, [token]);
     useEffect(() => {
-        console.log("VentasData actualizado dos:", ventasData);
-    }, [ventasData]);
+        // console.log("VentasData actualizado dos:", ventasData);
+    }, [SellData]);
 
 
 
     useEffect(() => {
         // Filtrar autos basados en el ID de usuario
         console.log("userData.id:", userData.id);
-        console.log("VentasData antes del filtro:", ventasData);
+        console.log("usedata: ", userData);
+        console.log("VentasData antes del filtro:", SellData);
 
         const userId = Number(userData.id);
+        const role = Number(userData.role);
+        console.log("const: ", userId);
 
-
-        if (userId == 1) {
-            console.log("entro a 1 " + userId);
-            const filteredCars = ventasData.filter(ventaData => {
+        if (role == 1) {
+            console.log("entro a 1 " + role);
+            const filteredCars = SellData.filter(ventaData => {
                 console.log("Venta actual:", ventaData);
-                console.log("ID de usuario en la venta:", ventaData.id_usuario_fk);
+                console.log("ID de usuario en la venta:", ventaData.Id_foreign_key);
                 console.log("ID de usuario actual:", userId);
-                return Number(ventaData.id_usuario_fk) === userId;
+                return ventaData.Id_foreign_key === userId;
             });
-            console.log("datos en" + filteredCars);
+            console.log("datos en if : " + filteredCars);
             setFilteredCars(filteredCars);
 
-        } else if (userId == 2) {
+        } else if (role == 2) {
             console.log("entro a 2 " + userId)
-            const allCars = ventasData.filter(ventaData => {
+            const allCars = SellData.filter(ventaData => {
                 console.log("Venta actual:", ventaData);
-                console.log("ID de usuario en la venta:", ventaData.id_usuario_fk);
+                console.log("ID de usuario en la venta:", ventaData.Id_foreign_key);
                 console.log("ID de usuario actual:", userId);
                 // Puedes omitir la condición para que todos los elementos se incluyan
                 return true;
             });
 
-            console.log("datos en" + filteredCars);
+            console.log("datos en", filteredCars);
             setFilteredCars(allCars);
         }
 
+    }, [SellData, userData]);
 
-
-
-
-
-
-
-
-    }, [ventasData, userData]);
-
-
-
-    console.log("datos filtrados", filteredCars);
-
-
-
-
+    // console.log("datos filtrados", filteredCars);
 
     return (
         <>
@@ -116,37 +104,37 @@ function indexSell() {
                     <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="overflow-hidden">
-                                <table className="min-w-full">
-                                    <thead className="bg-white border-b">
-                                        <tr>
-                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Id
-                                            </th>
-
-                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Id del Comprador
-                                            </th>
-                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Id del carro
-                                            </th>
-                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Monto
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {filteredCars.map((venta) => (
-                                            <tr key={`${venta.id}-${venta.id_usuario_fk}`}>
-                                                <td>{venta.id}</td>
-                                                <td>{venta.id_usuario_fk}</td>
-                                                <td>{venta.id_Auto_fk}</td>
-                                                <td>{venta.monto}</td>
+                                <div className="flex justify-center items-center">
+                                    <table className="min-w-full border-collapse">
+                                        <thead className="bg-gray-200 border-b">
+                                            <tr>
+                                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-3 text-left">
+                                                    Id
+                                                </th>
+                                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-3 text-left">
+                                                    Id del Comprador
+                                                </th>
+                                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-3 text-left">
+                                                    Id del carro
+                                                </th>
+                                                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-3 text-left">
+                                                    Monto
+                                                </th>
                                             </tr>
-                                        ))}
+                                        </thead>
+                                        <tbody>
+                                            {filteredCars.map((venta) => (
+                                                <tr key={`${venta.id}-${venta.id_usuario_fk}`}>
+                                                    <td className="border px-6 py-3">{venta.id}</td>
+                                                    <td className="border px-6 py-3">{venta.Id_foreign_key}</td>
+                                                    <td className="border px-6 py-3">{venta.Id_foreign_keycars}</td>
+                                                    <td className="border px-6 py-3">{venta.amount}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                    </tbody>
-
-                                </table>
                             </div>
                         </div>
                     </div>

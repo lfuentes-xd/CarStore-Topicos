@@ -13,9 +13,9 @@ class Cars extends Model
     protected $table = "cars";
     // public static $timestamps = false;
 
-    public function Venta(): HasMany
+    public function Sale(): HasMany
     {
-        return $this->hasMany(Venta::class);
+        return $this->hasMany(Sale::class);
     }
 
     public function Brands(): BelongsTo

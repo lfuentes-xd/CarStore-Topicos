@@ -55,13 +55,13 @@ function ConsumerInf() {
     const handleSubmit = async e => {
         if (e && e.preventDefault()) e.preventDefault();
         const formData = new FormData();
-        formData.append("id_usuario", userData.id );
-        formData.append("teléfono", formValue.teléfono);
-        formData.append("calle", formValue.calle);
-        formData.append("N_casa", formValue.N_casa);
-        formData.append("Nombre", formValue.Nombre);
-        formData.append("per_apellido", formValue.per_apellido);
-        formData.append("sdo_apellido", formValue.sdo_apellido);
+        formData.append("id_user", userData.id );
+        formData.append("phone_number", formValue.phone_number);
+        formData.append("street", formValue.street);
+        formData.append("House_number", formValue.House_number);
+        formData.append("name", formValue.name);
+        formData.append("Surname", formValue.Surname);
+        formData.append("second_surname", formValue.second_surname);
 
         const response = await axios.post("http://localhost/CarStore-Topicos/public/api/infoC",//aqui pon el link que tu tienes 
             formData,
@@ -96,32 +96,32 @@ function ConsumerInf() {
                 </div>
 
                 <div className="mt-4 mb-4" >
-                    <InputLabel htmlFor="PhoneNumber" value="Phone Number" />
-                    <TextInput value={formValue.email} onChange={onChange} id="teléfono" type="number" name="teléfono" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
+                    <InputLabel htmlFor="phone_number" value="Phone Number" />
+                    <TextInput value={formValue.phone_number} onChange={onChange} id="phone_number" type="number" name="phone_number" className="mt-1 block w-full p-2 border border-black" autoComplete="username" required />
                 </div>
 
                 <div className="mt-4 mb-4">
-                    <InputLabel htmlFor="Street" value="Street" />
-                    <TextInput value={formValue.name} onChange={onChange} id="calle" type="text" name="calle" className="mt-1 block w-full p-2 border border-black" required />
+                    <InputLabel htmlFor="street" value="Street" />
+                    <TextInput value={formValue.street} onChange={onChange} id="street" type="text" name="street" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
 
                 <div className="mt-4 mb-4">
-                    <InputLabel htmlFor="HouseNO" value="House Number" />
-                    <TextInput value={formValue.password} onChange={onChange} id="N_casa" type="number" name="N_casa" className="mt-1 block w-full p-2 border border-black" required />
+                    <InputLabel htmlFor="House_number" value="House Number" />
+                    <TextInput value={formValue.House_number} onChange={onChange} id="House_number" type="number" name="House_number" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
 
                 <div className="mt-4 mb-4">
-                    <InputLabel htmlFor="names" value="Name(s)" />
-                    <TextInput value={formValue.password_confirmation} onChange={onChange} id="Nombre" type="text" name="Nombre" className="mt-1 block w-full p-2 border border-black" required />
+                    <InputLabel htmlFor="name" value="Name(s)" />
+                    <TextInput value={formValue.name} onChange={onChange} id="name" type="text" name="name" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
                 <div className="mt-4 mb-4">
-                    <InputLabel htmlFor="Fname" value="First surname" />
-                    <TextInput value={formValue.password} onChange={onChange} id="per_apellido" type="text" name="per_apellido" className="mt-1 block w-full p-2 border border-black" required />
+                    <InputLabel htmlFor="Surname" value="First surname" />
+                    <TextInput value={formValue.Surname} onChange={onChange} id="Surname" type="text" name="Surname" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
 
                 <div className="mt-4 mb-4">
-                    <InputLabel htmlFor="Sname" value="Second surname" />
-                    <TextInput value={formValue.password_confirmation} onChange={onChange} id="sdo_apellido" type="text" name="sdo_apellido" className="mt-1 block w-full p-2 border border-black" required />
+                    <InputLabel htmlFor="second_surname" value="Second surname" />
+                    <TextInput value={formValue.second_surname} onChange={onChange} id="second_surname" type="text" name="second_surname" className="mt-1 block w-full p-2 border border-black" required />
                 </div>
 
                 <div className="">

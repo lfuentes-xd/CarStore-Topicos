@@ -5,8 +5,9 @@ use App\Http\Controllers\CarsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\CompradorController;
-use App\Http\Controllers\VentaController;
+
+use App\Http\Controllers\SaleController;
+use  App\Http\Controllers\BuyerController;
 
 
 
@@ -34,7 +35,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/Car_brands', [CarsController::class, 'create']);
 
-    Route::get('/ventas_index', [VentaController::class, 'index']);
+    Route::get('/ventas_index', [SaleController::class, 'index']);
 
     Route::post('/insert', [CarsController::class, 'store']);
     Route::get('/Car_token', [CarsController::class, 'token']);
@@ -45,8 +46,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/Brands_index', [BrandsController::class, 'index']);
     Route::post('/insertBrand', [BrandsController::class, 'store']);
     Route::post('/Brands/{id}/delete', [BrandsController::class, 'destroy']);
-    Route::post('/createV', [VentaController::class, 'create']);
-    Route::post('/infoC', [CompradorController::class, 'create']);
+    Route::post('/createV', [SaleController::class, 'create']);
+    Route::post('/infoC', [BuyerController::class, 'create']);
 
 
     //Route::post('/products', [ProductController::class]);
