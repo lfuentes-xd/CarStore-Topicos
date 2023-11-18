@@ -9,11 +9,13 @@ import axios from "axios"
 import { useContext } from 'react';
 import { AuthContext } from "../../components/AuthProvider"
 
+
 function CarsAdmon() {
     const [cars, setCars] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filteredCars, setFilteredCars] = useState(cars);
     const navigate = useNavigate();
     const { auth } = useContext(AuthContext);//token
-
     const token = auth.token;//token
 
     useEffect(() => {
@@ -24,9 +26,22 @@ function CarsAdmon() {
                 }
             });
             setCars(result.data);
+            setFilteredCars(result.data);
         };
         fetchData();
     }, []);
+
+    const handleSearchChange = (e) => {
+        setSearch(e.target.value);
+        filterCars(e.target.value);
+    };
+
+    const filterCars = (searchValue) => {
+        const filtered = cars.filter(car =>
+            car.Model.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setFilteredCars(filtered);
+    };
 
     const deleteCar = async (id) => {
         try {
@@ -52,6 +67,13 @@ function CarsAdmon() {
         <>
             <div className="container my-5 mx-auto">
                 <h1 className="text-xl">Panel de administracion de carros</h1>
+
+                <input type="text"
+                    placeholder="Buscar por modelo..."
+                    value={search}
+                    onChange={handleSearchChange}
+                    className="mt-1 block p-2 border border-black" />
+
                 <LinktoButton to="/CreateCars" className="my-3 bg-gray-500 text-black">
                     Crear registro
                     <img src={Plusicon} alt="" className="ml-2 w-4 h-4" />
@@ -68,6 +90,9 @@ function CarsAdmon() {
                                             </th>
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
                                                 M A R C A
+                                            </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                                M O D E L O
                                             </th>
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 ">
                                                 A Ñ O
@@ -86,9 +111,12 @@ function CarsAdmon() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cars.map((car) => (
+                                        {filteredCars.map((car) => (
                                             <tr key={car.id} className="bg-gray-100 border-b text-center">
                                                 <td className="text-sm px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
+                                                <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                                    {car.brands ? car.brands.Desc : ''}
+                                                </td>
                                                 <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.Model}</td>
                                                 <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.year}</td>
                                                 <td className="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{car.Km}</td>

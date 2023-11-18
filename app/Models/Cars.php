@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Cars extends Model
 {
     use HasFactory;
-    protected $table = "Cars";
+    protected $table = "cars";
     // public static $timestamps = false;
 
     public function Venta(): HasMany
@@ -20,7 +20,7 @@ class Cars extends Model
 
     public function Brands(): BelongsTo
     {
-        return $this->belongsTo(brands::class, 'Id_Brand_fk', 'id');
+        return $this->belongsTo(brands::class, 'Id_Brand_fk');
     }
 
     protected $fillable = [

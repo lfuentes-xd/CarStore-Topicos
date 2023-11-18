@@ -13,9 +13,10 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $Auto = Cars::all();
-        return $Auto;
+        $cars = Cars::with('Brands')->get();
+        return response()->json($cars);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,20 +30,20 @@ class CarsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'Id_Brand_fk' => 'required',
-        'Model' => 'required',
-        'year' => 'required|numeric|min:0',
-        'Color' => 'required|min:4|max:25',
-        'type' => 'required|min:4|max:25',
-        'fuel' => 'required',
-        'Available' => 'required|min:0',
-        'Image' => 'required|mimes:jpeg,png,jpg',
-        'Km' => 'required|numeric|min:0',
-        'version' => 'required',
-        'TM' => 'required',
-        'liters' => 'required',
-        'price' => 'required|min:0', // Añade validación de tipo de archivo si es necesario
-    ]);
+            'Id_Brand_fk' => 'required',
+            'Model' => 'required',
+            'year' => 'required|numeric|min:0',
+            'Color' => 'required|min:4|max:25',
+            'type' => 'required|min:4|max:25',
+            'fuel' => 'required',
+            'Available' => 'required|min:0',
+            'Image' => 'required|mimes:jpeg,png,jpg',
+            'Km' => 'required|numeric|min:0',
+            'version' => 'required',
+            'TM' => 'required',
+            'liters' => 'required',
+            'price' => 'required|min:0', // Añade validación de tipo de archivo si es necesario
+        ]);
 
 
         if ($request->hasFile('Image')) {
@@ -108,7 +109,7 @@ class CarsController extends Controller
             'Color' => $request->Color,
             'type' => $request->type,
             'Km' => $request->km,
-            'price'=> $request->Costo
+            'price' => $request->Costo
         ]);
 
         return response()->json(['message' => 'Auto actualizado exitosamente', 'data' => $car]);
