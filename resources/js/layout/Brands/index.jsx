@@ -8,6 +8,16 @@ import { AuthContext } from "../../components/AuthProvider";
 function BrandsAdmon() {
     const [cars, setCars] = useState([]);
     const { auth } = useContext(AuthContext);//token
+    const [search, setSearch] = useState('');
+
+    const handleSearchChange = (e) => {
+        setSearch(e.target.value); // Actualiza el estado del término de búsqueda
+    };
+
+    // Filtra los carros basados en el término de búsqueda
+    const filteredCars = cars.filter(car =>
+        car.Desc.toLowerCase().includes(search.toLowerCase())
+    );
 
     const token = auth.token;//token
     useEffect(() => {
@@ -28,6 +38,14 @@ function BrandsAdmon() {
         <>
             <div className="container my-5 mx-auto">
                 <h1 className="text-xl">Panel de administracion de marcas</h1>
+                <input
+                    type="text"
+                    placeholder="Buscar por marca..."
+                    value={search}
+                    onChange={handleSearchChange}
+                    className="mt-3 p-2 border border-black"
+                />
+                <br />
                 <LinktoButton to="/CreateBrands" className="my-3 bg-gray-500 text-black">
                     Crear registro
                     <img src={Plusicon} alt="" className="ml-2 w-4 h-4" />
@@ -48,7 +66,7 @@ function BrandsAdmon() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cars.map((car) => (
+                                        {filteredCars.map((car) => (
                                             <tr key={car.id} className="bg-gray-100 border-b text-center">
                                                 <td className="text-sm font-light px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Desc}</td>

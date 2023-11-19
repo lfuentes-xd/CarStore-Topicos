@@ -132,7 +132,7 @@ function CreateCars() {
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Km" value="Km" />
-                            <TextInput value={formValue.Km} onChange={onChange} id="Km" type="text" name="Km" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.Km} onChange={onChange} id="Km" type="number" name="Km" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="version" value="Versión" />
@@ -144,7 +144,7 @@ function CreateCars() {
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="liters" value="Capacidad de litros" />
-                            <TextInput value={formValue.liters} onChange={onChange} id="liters" type="text" name="liters" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.liters} onChange={onChange} id="liters" type="number" name="liters" className="mt-1 block w-full p-2 border border-black"  required />
                         </div>
 
                         <div className="mt-4 mb-4" >

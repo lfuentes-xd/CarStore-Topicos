@@ -1,21 +1,15 @@
-import PrimaryButton from "../../components/PrimaryButton"
-import EditIcon from "../../../Images/Icons/Details.png"
-import Plusicon from "../../../Images/Icons/add.png"
-import DeleteIcon from "../../../Images/Icons/delete.png"
-import LinktoButton from "../../components/LinktoButton"
-import { useNavigate } from "react-router-dom"
-import React, { useEffect, useState } from "react"
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useContext } from 'react';
-import { AuthContext } from "../../components/AuthProvider"
+import { AuthContext } from "../../components/AuthProvider";
 
 function indexSell() {
     const { auth } = useContext(AuthContext);
     const token = auth.token;
-    const [SellData, setSellData] = useState([]);
-
-    const [userData, setUserData] = useState({});//para el token
-    const [filteredCars, setFilteredCars] = useState([]);
+    const [sellData, setSellData] = useState([]);
+    const [userData, setUserData] = useState({});
+    const [filteredSales, setFilteredSales] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,22 +21,14 @@ function indexSell() {
                         }
                     });
                     setUserData(userResponse.data);
-                    // console.log("Datos de usuario:", userResponse.data);
                 }
 
                 const carResponse = await axios.get('http://localhost/CarStore-Topicos/public/api/ventas_index', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
-                }
-                );
+                });
                 setSellData(carResponse.data);
-                // console.log("Datos de ventas:", carResponse.data, "ventadata:", ventasData.data);
-
-
-                // Verificar si ventasData se ha actualizado correctamente
-                //  console.log("VentasData actualizado:", ventasData);
-
             } catch (error) {
                 console.log("Error: ", error);
             }
@@ -50,56 +36,45 @@ function indexSell() {
 
         fetchData();
     }, [token]);
-    useEffect(() => {
-        // console.log("VentasData actualizado dos:", ventasData);
-    }, [SellData]);
-
-
 
     useEffect(() => {
-        // Filtrar autos basados en el ID de usuario
-        console.log("userData.id:", userData.id);
-        console.log("usedata: ", userData);
-        console.log("VentasData antes del filtro:", SellData);
-
         const userId = Number(userData.id);
-        const role = Number(userData.role);
-        console.log("const: ", userId);
+        const userRole = Number(userData.role);
 
-        if (role == 1) {
-            console.log("entro a 1 " + role);
-            const filteredCars = SellData.filter(ventaData => {
-                console.log("Venta actual:", ventaData);
-                console.log("ID de usuario en la venta:", ventaData.Id_foreign_key);
-                console.log("ID de usuario actual:", userId);
-                return ventaData.Id_foreign_key === userId;
-            });
-            console.log("datos en if : " + filteredCars);
-            setFilteredCars(filteredCars);
-
-        } else if (role == 2) {
-            console.log("entro a 2 " + userId)
-            const allCars = SellData.filter(ventaData => {
-                console.log("Venta actual:", ventaData);
-                console.log("ID de usuario en la venta:", ventaData.Id_foreign_key);
-                console.log("ID de usuario actual:", userId);
-                // Puedes omitir la condición para que todos los elementos se incluyan
-                return true;
-            });
-
-            console.log("datos en", filteredCars);
-            setFilteredCars(allCars);
+        if (userRole === 1) {
+            const filteredCars = sellData.filter(ventaData => ventaData.Id_foreign_key === userId);
+            setFilteredSales(filteredCars);
+        } else if (userRole === 2) {
+            setFilteredSales(sellData);
         }
+    }, [userData, sellData]);
 
-    }, [SellData, userData]);
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
-    // console.log("datos filtrados", filteredCars);
+    const filteredSalesBySearch = filteredSales.filter(venta => {
+        if (userData.role === 2) {
+            return venta.Id_foreign_key.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        } else if (userData.role === 1) {
+            return venta.Id_foreign_keycars.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return false;
+    });
 
     return (
         <>
             <div className="container my-5 mx-auto">
-
                 <h1 className="text-xl">Panel de administracion de ventas</h1>
+                <div className="my-5">
+                    <input
+                        type="text"
+                        placeholder="Buscar por ID de Comprador..."
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        className="p-2 border border-black"
+                    />
+                </div>
                 <div className="flex flex-col mt-5">
                     <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -123,7 +98,7 @@ function indexSell() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {filteredCars.map((venta) => (
+                                            {filteredSalesBySearch.map((venta) => (
                                                 <tr key={`${venta.id}-${venta.id_usuario_fk}`}>
                                                     <td className="border px-6 py-3">{venta.id}</td>
                                                     <td className="border px-6 py-3">{venta.Id_foreign_key}</td>
@@ -134,7 +109,6 @@ function indexSell() {
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -144,4 +118,4 @@ function indexSell() {
     )
 }
 
-export default indexSell
+export default indexSell;
