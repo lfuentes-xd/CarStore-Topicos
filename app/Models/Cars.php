@@ -27,7 +27,7 @@ class Cars extends Model
         'Id_Brand_fk',
         'Model',
         'year',
-        'Color',
+        'Colour',
         'type',
         'fuel',
         'Available',

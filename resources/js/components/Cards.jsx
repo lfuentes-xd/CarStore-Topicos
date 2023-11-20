@@ -6,7 +6,7 @@ function Cards(props) {
     const navigate = useNavigate();
     const model = props.model;
     const year = props.year;
-    const color = props.color;
+    const colour = props.colour;
     const type = props.type; // Cambio aquí
     const fuel = props.fuel;
     const disponibility = props.disp;
@@ -25,7 +25,7 @@ function Cards(props) {
             state: {
                 model: model,
                 year: year,
-                color: color,
+                colour: colour,
                 type: type,
                 fuel: fuel,
                 disponibility: disponibility,
@@ -42,7 +42,7 @@ function Cards(props) {
 
     return (
         <>
-            <div className="mt-5 shadow-md border border-gray-200 rounded-lg max-w-sm bg-white dark:border-gray-700 text-white mx-auto">
+            <div className="mt-5 shadow-md border border-gray-200 rounded-lg max-w-sm bg-white dark:border-gray-700 text-white mx-2">
                 <img className="rounded-t-lg" src={'http://localhost/CarStore-Topicos/public/storage/' + Image} alt="" />
                 <div className="p-5">
                     <a href="#">

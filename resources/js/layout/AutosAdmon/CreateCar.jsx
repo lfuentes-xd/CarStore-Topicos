@@ -51,7 +51,7 @@ function CreateCars() {
         formData.append("Id_Brand_fk", formValue.Id_Brand_fk);
         formData.append("Model", formValue.Model);
         formData.append("year", formValue.year);
-        formData.append("Color", formValue.Color);
+        formData.append("Colour", formValue.Colour);
         formData.append("type", formValue.type);
         formData.append("fuel", formValue.fuel);
         formData.append("Available", formValue.Available);
@@ -122,8 +122,8 @@ function CreateCars() {
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Color" value="Color" />
-                            <TextInput value={formValue.Color} onChange={onChange} id="Color" type="text" name="Color" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Colour" value="Color" />
+                            <TextInput value={formValue.Colour} onChange={onChange} id="Colour" type="text" name="Colour" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >

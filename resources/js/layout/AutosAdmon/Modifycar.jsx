@@ -84,8 +84,8 @@ const ModifyCar = () => {
                         </div>
 
                         <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="Color" value="Color" />
-                            <TextInput value={formValue.Color} onChange={onChange} id="Color" type="text" name="Color" className="mt-1 block w-full p-2 border border-black" required />
+                            <InputLabel htmlFor="Colour" value="Colour" />
+                            <TextInput value={formValue.Colour} onChange={onChange} id="Colour" type="text" name="Colour" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >

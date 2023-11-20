@@ -27,6 +27,7 @@ function ListCards() {
         getCars()
     }, []);
 
+
     console.log("ver id" + carData.id);
     if (!carData.length) return
     <span className="visually-hidden">Loading...</span>
@@ -41,7 +42,7 @@ function ListCards() {
                         id={car.id}
                         model={car.Model}
                         year={car.year}
-                        color={car.Color}
+                        colour={car.Colour}
                         type={car.type}
                         fuel={car.fuel}
                         disponibility={car.Available}

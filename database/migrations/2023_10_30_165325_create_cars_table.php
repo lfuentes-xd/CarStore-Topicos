@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('Id_Brand_fk');
             $table->string('Model');
             $table->integer('year');
-            $table->string('Color');
+            $table->string('Colour');
             $table->String('type');
             $table->String('fuel');
             $table->integer('Available');

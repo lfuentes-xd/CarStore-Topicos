@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 function ViewCar() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { id, model, year, color, type, fuel, disponibility, image, setShowCarInfo, Km, version, TM, liters, price } = location.state;
+    const { id, model, year, colour, type, fuel, disponibility, image, setShowCarInfo, Km, version, TM, liters, price } = location.state;
     const { auth } = useContext(AuthContext);//token
     const token = auth.token;//token
     console.log("id en viw nuevo" + id);
@@ -121,7 +121,7 @@ function ViewCar() {
 
                     <div className='border border-gray-300  h-auto w-full mt-5'>
                         <h1 className='m-3 font-bold text-xl'>Color del auto</h1>
-                        <p className='m-3'>{color}</p>
+                        <p className='m-3'>{colour}</p>
                     </div>
 
                     <div className='border border-gray-300 h-auto w-full mt-5'>
