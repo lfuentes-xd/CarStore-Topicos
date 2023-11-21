@@ -69,10 +69,6 @@ class CarsController extends Controller
 
             // Resto del código de almacenamiento
         }
-
-        // Manejar cualquier validación adicional o respuestas de error aquí
-
-        // Redireccionar o devolver una respuesta según sea necesario
     }
 
 
@@ -94,8 +90,7 @@ class CarsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
-    public function update(Request $request, String $id)
+     */ public function update(Request $request, $id)
     {
         $car = Cars::find($id);
 
@@ -103,18 +98,30 @@ class CarsController extends Controller
             return response()->json(['error' => 'Auto no encontrado'], 404);
         }
 
-        $car->update([
-            'Model' => $request->Model,
-            'year' => $request->year,
-            'Color' => $request->Color,
-            'type' => $request->type,
-            'Km' => $request->km,
-            'price' => $request->Costo
-        ]);
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('Images', 'public');
+            $car->update([
+                'Model' => $request->Model,
+                'year' => $request->year,
+                'Colour' => $request->Colour,
+                'type' => $request->type,
+                'km' => $request->Km,
+                'price' => $request->price,
+                "Image" => $imagePath
+            ]);
+        } else {
+            $car->update([
+                'Model' => $request->Model,
+                'year' => $request->year,
+                'Colour' => $request->Colour,
+                'type' => $request->type,
+                'Km' => $request->Km,
+                'price' => $request->price,
+            ]);
+        }
 
         return response()->json(['message' => 'Auto actualizado exitosamente', 'data' => $car]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -122,10 +129,5 @@ class CarsController extends Controller
     public function destroy(String $id)
     {
         Cars::destroy($id);
-    }
-
-    public function token()
-    {
-        return csrf_token();
     }
 }

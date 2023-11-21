@@ -55,7 +55,6 @@ function CreateCars() {
         formData.append("type", formValue.type);
         formData.append("fuel", formValue.fuel);
         formData.append("Available", formValue.Available);
-        // formData.append("Image", formValue.Image);
         formData.append("Image", e.target.elements.Image.files[0]); // Adjunta el archivo
         formData.append("Km", formValue.Km);
         formData.append("version", formValue.version);
@@ -72,7 +71,6 @@ function CreateCars() {
                     "Content-Type": "multipart/form-data",
                     Accept: "application/json",
                     'Authorization': `Bearer ${token}`
-                    // "X-CSRF-TOKEN": "k496d5cqX5hmytStSVb8bVzGSUFkYmvK3k2d7qEk"
                 }
 
             }

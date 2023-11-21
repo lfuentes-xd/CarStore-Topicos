@@ -68,8 +68,8 @@ function BrandsAdmon() {
                                     <tbody>
                                         {filteredCars.map((car) => (
                                             <tr key={car.id} className="bg-gray-100 border-b text-center">
-                                                <td className="text-sm font-light px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{car.Desc}</td>
+                                                <td className="text-sm  px-6 py-4 whitespace-nowrap text-gray-900">{car.id}</td>
+                                                <td className="text-sm text-gray-900  px-6 py-4 whitespace-nowrap">{car.Desc}</td>
                                             </tr>
                                         ))}
                                     </tbody>
