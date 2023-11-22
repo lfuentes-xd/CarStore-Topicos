@@ -31,6 +31,8 @@ Route::get('/Car_index', [CarsController::class, 'index']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
     Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/Car_indexadm', [CarsController::class, 'indexadm']);
+
 
 
     Route::get('/Car_brands', [CarsController::class, 'create']);
@@ -41,6 +43,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/Car_token', [CarsController::class, 'token']);
     Route::post('/car/{id}/delete', [CarsController::class, 'destroy']);
     Route::post('/Updatecar/{id}', [CarsController::class, 'update']);
+    Route::post('/disable/{id}', [CarsController::class, 'disable']);
 
 
     Route::get('/Brands_index', [BrandsController::class, 'index']);

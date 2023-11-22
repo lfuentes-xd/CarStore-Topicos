@@ -17,6 +17,7 @@ function Cards(props) {
     const liters = props.liters;
     const price = props.price;
     const carId = props.id;
+    const Available = props.Available;
 
 
     const handleButtonClick = () => {
@@ -28,7 +29,7 @@ function Cards(props) {
                 colour: colour,
                 type: type,
                 fuel: fuel,
-                disponibility: disponibility,
+                Available: Available,
                 image: Image,
                 Km: Km,
                 version: version,
@@ -36,6 +37,7 @@ function Cards(props) {
                 liters: liters,
                 price: price,
                 id: carId,
+            
             }
         });
     };

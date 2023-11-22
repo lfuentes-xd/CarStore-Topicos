@@ -26,6 +26,7 @@ const ModifyCar = () => {
         type: car.type,
         Km: car.Km,
         price: car.price,
+        Available: car.Available,
         // Image: car.Image
     });
 
@@ -44,7 +45,7 @@ const ModifyCar = () => {
         formData.append("Colour", formValue.Colour);
         formData.append("type", formValue.type);
         // formData.append("fuel", formValue.fuel);
-        // formData.append("Available", formValue.Available);
+        formData.append("Available", formValue.Available);
         formData.append("Image", e.target.elements.Image.files[0]); // Adjunta el archivo
         formData.append("Km", formValue.Km);
         // formData.append("version", formValue.version);
@@ -97,7 +98,12 @@ const ModifyCar = () => {
                             </select>
 
                         </div> */}
-
+                        
+                        <select value={formValue.Available} onChange={onChange} id="Available" name="Available" className="mt-1 block w-full p-2 border border-black">
+                            <option value="00">Disponibilidad del carro</option>
+                            <option value="1">Disponible</option>
+                            <option value="0">No disponible</option>
+                        </select>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Model" value="Modelo del auto" />
                             <TextInput value={formValue.Model} onChange={onChange} id="Model" type="text" name="Model" className="mt-1 block w-full p-2 border border-black" required />

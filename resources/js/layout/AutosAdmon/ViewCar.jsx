@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 function ViewCar() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { id, model, year, colour, type, fuel, disponibility, image, setShowCarInfo, Km, version, TM, liters, price } = location.state;
+    const { id, model, year, colour, type, fuel, Available, image, setShowCarInfo, Km, version, TM, liters, price } = location.state;
     const { auth } = useContext(AuthContext);//token
     const token = auth.token;//token
     console.log("id en viw nuevo" + id);
@@ -47,11 +47,11 @@ function ViewCar() {
             formData.append("amount", price);
 
             const response = await axios.post("http://localhost/CarStore-Topicos/public/api/createV",//aqui pon el link que tu tienes
-                formData,{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
+            }
             ).then(response => {
                 console.log("Compra hecha", response);
 
@@ -61,6 +61,18 @@ function ViewCar() {
                 console.log("id-usuario_fk", userData.id, "id_Auto_fk", id, "monto", price);
                 alert("Compra hecha");
 
+                const responsedisp =  axios.post(`http://localhost/CarStore-Topicos/public/api/disable/${id}`,
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            Accept: "application/json",
+                            'Authorization': `Bearer ${token}`
+                        }
+
+                    }
+                );
+
                 navigate("/home");//desde el nombre
 
             }).catch(error => {
@@ -68,6 +80,7 @@ function ViewCar() {
                 alert("error en la compra  ");
 
             });
+
         } else {
             navigate("/login");
         }

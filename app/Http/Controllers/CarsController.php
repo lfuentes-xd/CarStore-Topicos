@@ -13,10 +13,19 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Cars::with('Brands')->get();
+        $cars = Cars::with('Brands')
+                    ->where('Available', 1)
+                    ->get();
+        
         return response()->json($cars);
     }
-
+    public function indexadm()
+    {
+        $cars = Cars::with('Brands')
+                    ->get();
+        
+        return response()->json($cars);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -107,7 +116,8 @@ class CarsController extends Controller
                 'type' => $request->type,
                 'km' => $request->Km,
                 'price' => $request->price,
-                "Image" => $imagePath
+                "Image" => $imagePath,
+                "Available"=> $Available
             ]);
         } else {
             $car->update([
@@ -117,6 +127,7 @@ class CarsController extends Controller
                 'type' => $request->type,
                 'Km' => $request->Km,
                 'price' => $request->price,
+                'Available' =>$request->Available
             ]);
         }
 
@@ -130,4 +141,22 @@ class CarsController extends Controller
     {
         Cars::destroy($id);
     }
+
+    public function disable(Request $request, $id)
+    {
+        $car = Cars::find($id);
+
+        if (!$car) {
+            return response()->json(['error' => 'Auto no encontrado'], 404);
+        }
+
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('Images', 'public');
+        }
+        $car->Available = 0; 
+        $car->save();
+
+        return response()->json(['message' => 'Auto actualizado exitosamente']);
+    }
+
 }

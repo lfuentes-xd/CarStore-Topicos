@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "raect": "^1.0.4",
-        "react-router-dom": "^6.18.0",
+        "react-router-dom": "^6.19.0",
         "router-dom": "^2.2.11"
     }
 }
