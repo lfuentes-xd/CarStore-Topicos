@@ -17,9 +17,10 @@ use  App\Http\Controllers\BuyerController;
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login_user', [AuthenticationController::class, 'login_user']);
 
-route::get('/wel', function () {
+Route::get('/wel', function () {
     return view('welcome');
-});
+})->name('welcome'); // Asignando el nombre 'welcome' a la ruta '/wel'
+
 
 Route::middleware('auth:api')->get('/user_index', [AuthenticationController::class, 'user_index']);
 
