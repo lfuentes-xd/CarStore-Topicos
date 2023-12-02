@@ -44,19 +44,23 @@ function CarsAdmon() {
     };
 
     const deleteCar = async (id) => {
-        try {
-            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`, {
+       
+            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`, FormData, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
-            if (response.status === 200) {
-                // Actualizar la lista de autos después de eliminar
-                setCars(cars.filter(car => car.id !== id));
-            }
-        } catch (error) {
-            console.error('Error al eliminar el vehículo', error);
-        }
+            }).then(response=>{
+                if (response.status === 200) {
+                    // Actualizar la lista de autos después de eliminar
+                    setCars(cars.filter(car => car.id !== id));
+                    console.log("entro");
+                }
+                console.log("carro borrado");
+            }).catch(error=>{
+                console.log("error al borrar", error);
+            })
+            
+        
     };
 
     const handleModifyClick = (car) => {
