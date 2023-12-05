@@ -43,20 +43,19 @@ function CarsAdmon() {
         setFilteredCars(filtered);
     };
 
-    const deleteCar = async (id) => {
-        try {
-            const response = await axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (response.status === 200) {
-                // Actualizar la lista de autos después de eliminar
-                setCars(cars.filter(car => car.id !== id));
+    const deleteCar = (id) => {
+        axios.post(`http://localhost/CarStore-Topicos/public/api/car/${id}/delete`, null, {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        } catch (error) {
-            console.error('Error al eliminar el vehículo', error);
-        }
+        })
+            .then(response => {
+                setCars(cars.filter(car => car.id !== id));
+                setFilteredCars(filteredCars.filter(car => car.id !== id));
+            })
+            .catch(error => {
+                console.error('Error obteniendo la data', error);
+            });
     };
 
     const handleModifyClick = (car) => {

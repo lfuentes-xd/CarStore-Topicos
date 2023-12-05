@@ -1,10 +1,8 @@
 import TextInput from "../../components/TextInput"
 import InputLabel from "../../components/Inputlabel"
 import PrimaryButton from "../../components/PrimaryButton"
-// import SelectInput from "../../components/InputSelect"
 import BackIcon from "../../../Images/Icons/Back.png"
 import LinktoButton from "../../components/LinktoButton"
-// import FileInput from "../../components/Fileinput"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
