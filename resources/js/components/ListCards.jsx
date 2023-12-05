@@ -5,6 +5,7 @@ import Cards from './Cards';
 function ListCards() {
     const [carData, setCarData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedTransmission, setSelectedTransmission] = useState('');
 
     useEffect(() => {
         const getCars = async () => {
@@ -26,14 +27,44 @@ function ListCards() {
         setSearchTerm(event.target.value);
     };
 
+
     const filteredCars = carData.filter(car =>
-        car.Model.toLowerCase().includes(searchTerm.toLowerCase())
+        car.Model.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (selectedTransmission === '' || car.TM === selectedTransmission)
     );
+    const handleTransmissionChange = (event) => {
+        setSelectedTransmission(event.target.value);
+    };
+
+
+    console.log('Selected Transmission:', selectedTransmission);
+
+    carData.forEach(car => {
+        console.log('Car TM:', car.TM);
+    });
+
 
     return (
         <>
             <div className='container'>
                 <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Buscar por modelo..." className="mt-1 block p-2 border border-black" />
+                <div class="relative inline-block text-left">
+                    <select
+                        className="mt-1 block p-2 border border-black w-40"
+                        name="transmission"
+                        id="transmission"
+                        value={selectedTransmission}
+                        onChange={handleTransmissionChange}
+                    >
+                        <option value="">Tipos de Transmisión</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Automático">Automático</option>
+                    </select>
+
+
+                </div>
+
+
                 <div className='flex flex-wrap justify-around'>
                     {filteredCars.length ? (
                         filteredCars.map((car) => (

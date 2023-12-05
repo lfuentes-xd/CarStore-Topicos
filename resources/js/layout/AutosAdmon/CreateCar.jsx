@@ -21,7 +21,7 @@ function CreateCars() {
 
     //para poner los datos en las marcas
     useEffect(() => {
-        axios.get('http://localhost/CarStore-Topicos/public/api/Car_brands',{
+        axios.get('http://localhost/CarStore-Topicos/public/api/Car_brands', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -31,6 +31,7 @@ function CreateCars() {
             })
             .catch(error => {
                 console.error('Error obtenendo la data '.error);
+
             });
     }, []);
 
@@ -82,6 +83,7 @@ function CreateCars() {
             navigate("/CarsAdmon");//desde el nombre
         } else {
             console.log("Error during registration: ", response.data.message);
+            alert("Llena todos los campos, si no hay marcas, agregalas previamente");
         }
     };
 
@@ -114,7 +116,7 @@ function CreateCars() {
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="year" value="Año del vehiculo" />
-                            <TextInput value={formValue.year} onChange={onChange} id="year" type="number" name="year" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput min="0" value={formValue.year} onChange={onChange} id="year" type="number" name="year" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
@@ -124,29 +126,34 @@ function CreateCars() {
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="type" value="Carroceria" />
-                            <TextInput value={formValue.type} onChange={onChange} id="type" type="text" name="type" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.type} onChange={onChange} id="type" type="text" name="type" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="Km" value="Km" />
-                            <TextInput value={formValue.Km} onChange={onChange} id="Km" type="number" name="Km" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput min="0" value={formValue.Km} onChange={onChange} id="Km" type="number" name="Km" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="version" value="Versión" />
-                            <TextInput value={formValue.version} onChange={onChange} id="version" type="text" name="version" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput value={formValue.version} onChange={onChange} id="version" type="text" name="version" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
-                        <div className="mt-4 mb-4" >
-                            <InputLabel htmlFor="TM" value="Tipo de transmisión" />
-                            <TextInput value={formValue.TM} onChange={onChange} id="TM" type="text" name="TM" className="mt-1 block w-full p-2 border border-black"  required />
-                        </div>
+
+                        <InputLabel htmlFor="price" value="Transmision del carro" />
+                        <select value={formValue.TM} onChange={onChange} id="TM" name="TM" className="mt-1 block w-full p-2 border border-black">
+                            <option value="0">Selecciona un tipo de transmisión</option>
+                            <option value="Manual">Manual</option>
+                            <option value="Automático">Automático</option>
+                        </select>
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="liters" value="Capacidad de litros" />
-                            <TextInput value={formValue.liters} onChange={onChange} id="liters" type="number" name="liters" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput min="0" value={formValue.liters} onChange={onChange} id="liters" type="number" name="liters" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
 
                         <div className="mt-4 mb-4" >
                             <InputLabel htmlFor="price" value="Costo del carro" />
-                            <TextInput value={formValue.price} onChange={onChange} id="price" type="number" name="price" className="mt-1 block w-full p-2 border border-black"  required />
+                            <TextInput min="0" value={formValue.price} onChange={onChange} id="price" type="number" name="price" className="mt-1 block w-full p-2 border border-black" required />
                         </div>
+
+                        <InputLabel htmlFor="fuel" value="Tipo de combustible" />
 
                         <select value={formValue.fuel} onChange={onChange} id="fuel" name="fuel" className="mt-1 block w-full p-2 border border-black">
                             <option value="0">Selecciona un tipo de combustible</option>
@@ -160,17 +167,17 @@ function CreateCars() {
                         <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Available" value="¿Disponible?" />
 
-                        <select value={formValue.Available} onChange={onChange} id="Available" name="Available" className="mt-1 block w-full p-2 border border-black">
-                            <option value="0">Selecciona una opcion</option>
-                            <option value="1">Disponible</option>
-                            <option value="2">Sin disponibilidad</option>
-                        </select>
+                            <select value={formValue.Available} onChange={onChange} id="Available" name="Available" className="mt-1 block w-full p-2 border border-black">
+                                <option value="2">Selecciona una opcion</option>
+                                <option value="1">Disponible</option>
+                                <option value="0">Sin disponibilidad</option>
+                            </select>
 
                         </div>
 
                         <div className="mt-4 mb-4">
                             <InputLabel htmlFor="Image" value="Subir imagen." />
-                            <input value={formValue.Image} onChange={onChange} id="Image" name="Image" className="mt-1 block w-full p-2 border border-black" type="file"/>
+                            <input value={formValue.Image} onChange={onChange} id="Image" name="Image" className="mt-1 block w-full p-2 border border-black" type="file" />
                         </div>
 
                         <div className="">

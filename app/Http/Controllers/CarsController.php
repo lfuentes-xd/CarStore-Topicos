@@ -13,10 +13,19 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Cars::with('Brands')->get();
+        $cars = Cars::with('Brands')
+                    ->where('Available', 1)
+                    ->get();
+        
         return response()->json($cars);
     }
-
+    public function indexadm()
+    {
+        $cars = Cars::with('Brands')
+                    ->get();
+        
+        return response()->json($cars);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -98,18 +107,18 @@ class CarsController extends Controller
             return response()->json(['error' => 'Auto no encontrado'], 404);
         }
 
+        $request -> validate([
+            'Model'=> 'required',
+            'year'=>'required|numeric|min:0',
+            'Colour' => 'required|min:4|max:25',
+            'Km' => 'required|numeric|min:0',
+            'price' => 'required|min:0', 
+            'type' => 'required|min:4|max:25',
+
+        ]);
         if ($request->hasFile('Image')) {
             $imagePath = $request->file('Image')->store('Images', 'public');
-            $car->update([
-                'Model' => $request->Model,
-                'year' => $request->year,
-                'Colour' => $request->Colour,
-                'type' => $request->type,
-                'km' => $request->Km,
-                'price' => $request->price,
-                "Image" => $imagePath
-            ]);
-        } else {
+           
             $car->update([
                 'Model' => $request->Model,
                 'year' => $request->year,
@@ -117,6 +126,20 @@ class CarsController extends Controller
                 'type' => $request->type,
                 'Km' => $request->Km,
                 'price' => $request->price,
+                "Image" => $imagePath,
+                "Available"=> $request->Available,
+            ]);
+        } else {
+            
+
+            $car->update([
+                'Model' => $request->Model,
+                'year' => $request->year,
+                'Colour' => $request->Colour,
+                'type' => $request->type,
+                'Km' => $request->Km,
+                'price' => $request->price,
+                'Available' =>$request->Available,
             ]);
         }
 
@@ -130,4 +153,22 @@ class CarsController extends Controller
     {
         Cars::destroy($id);
     }
+
+    public function disable(Request $request, $id)
+    {
+        $car = Cars::find($id);
+
+        if (!$car) {
+            return response()->json(['error' => 'Auto no encontrado'], 404);
+        }
+
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('Images', 'public');
+        }
+        $car->Available = 0; 
+        $car->save();
+
+        return response()->json(['message' => 'Auto actualizado exitosamente']);
+    }
+
 }

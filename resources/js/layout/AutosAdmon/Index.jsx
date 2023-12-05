@@ -20,7 +20,7 @@ function CarsAdmon() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_index', {
+            const result = await axios.get('http://localhost/CarStore-Topicos/public/api/Car_indexadm', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -72,6 +72,7 @@ function CarsAdmon() {
                     value={search}
                     onChange={handleSearchChange}
                     className="mt-1 block p-2 border border-black" />
+
 
                 <LinktoButton to="/CreateCars" className="my-3 bg-gray-500 text-black">
                     Crear registro

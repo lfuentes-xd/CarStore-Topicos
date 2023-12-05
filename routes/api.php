@@ -17,9 +17,10 @@ use  App\Http\Controllers\BuyerController;
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login_user', [AuthenticationController::class, 'login_user']);
 
-route::get('/wel', function () {
+Route::get('/wel', function () {
     return view('welcome');
-});
+})->name('welcome'); // Asignando el nombre 'welcome' a la ruta '/wel'
+
 
 Route::middleware('auth:api')->get('/user_index', [AuthenticationController::class, 'user_index']);
 
@@ -31,6 +32,8 @@ Route::get('/Car_index', [CarsController::class, 'index']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
     Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/Car_indexadm', [CarsController::class, 'indexadm']);
+
 
 
     Route::get('/Car_brands', [CarsController::class, 'create']);
@@ -41,6 +44,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/Car_token', [CarsController::class, 'token']);
     Route::post('/car/{id}/delete', [CarsController::class, 'destroy']);
     Route::post('/Updatecar/{id}', [CarsController::class, 'update']);
+    Route::post('/disable/{id}', [CarsController::class, 'disable']);
 
 
     Route::get('/Brands_index', [BrandsController::class, 'index']);
